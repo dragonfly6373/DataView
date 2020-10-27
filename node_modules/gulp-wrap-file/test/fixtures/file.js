@@ -1,0 +1,1 @@
+define("test/fixtures/file", function(require, exports, module){module.exports = { init: function () { }, bindEvent: function () { $('.J_addTodo').on('click', addTodo); } };});
