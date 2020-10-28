@@ -13,6 +13,19 @@ var DataAdapter = (function() {
         console.log("try to connect db:", DB_NAME);
         return new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
     }
+    if (!String.prototype.format) String.prototype.format = function () {
+        var a = this;
+        for (var k in arguments) {
+            a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
+        }
+        return a
+    }
+    function getDataTypeName(code) {
+        for (k of Object.keys(DataType)) {
+            if (DataType[k] == code) return k;
+        }
+        return null;
+    }
     function convertDataByType(value, datatype) {
         switch(datatype) {
             case DataType.INT:
@@ -28,7 +41,7 @@ var DataAdapter = (function() {
     }
     function object2DBKeys(obj) {
         var dataset = {};
-        for (key in Object.keys(obj)) {
+        for (key of Object.keys(obj)) {
             dataset["$" + key] = obj[key];
         }
         return dataset;
@@ -39,7 +52,7 @@ var DataAdapter = (function() {
     }
     DB.prototype._isError = function(error) {
         if (error) {
-            this.onError(error);
+            this._onError(error);
             return true;
         }
         return false;
@@ -50,6 +63,7 @@ var DataAdapter = (function() {
     };
     DB.prototype.beginTransaction = function(callback) {
         var thiz = this;
+        this.transactional = true;
         if (!this.db) this.db = getConnection();
         try {
             console.log("[DB - Begin Transaction]");
@@ -65,6 +79,7 @@ var DataAdapter = (function() {
     DB.prototype.commit = function() {
         try {
             if (!this.db) return;
+            console.log("[DB - End Transaction]");
             this.db.exec("COMMIT");
         } catch(error) {
             this._onError(error);
@@ -78,9 +93,10 @@ var DataAdapter = (function() {
     DB.prototype.create = function(clazz, callback) {
         var thiz = this;
         if (!this.db) this.db = getConnection();
-        var sql = String.format("CREATE TABLE {0} ({1})", clazz.tablename, clazz.columns.map(col => {
-            return col.name + " " + col.datatype + (col.pk ? " PRIMARY KEY" : "") + (col.unique ? " UNIQUE" : "");
-        }).join(", "));
+        var columns = clazz.columns.map(col => {
+            return col.name + " " + getDataTypeName(col.datatype) + (col.pk ? " PRIMARY KEY" : "") + (col.unique ? " UNIQUE" : "");
+        }).join(", ");
+        var sql = "CREATE TABLE {0} ({1})".format(clazz.tablename, columns);
         try {
             console.log("[DB - Execute]:", sql);
             this.db.run(sql, [], function(error) {
@@ -96,14 +112,13 @@ var DataAdapter = (function() {
     DB.prototype.insert = function(clazz, object, callback) {
         var thiz = this;
         if (!this.db) this.db = getConnection();
-        var data = [];
-        clazz.columns.map(col => {
+        var values = clazz.columns.map(col => {
             return convertDataByType(object[col.name], col.datatype);
         }).join(",");
-        var sql = String.format("INSERT INTO {0} ({1}) VALUES({2})", clazz.tablename, clazz.columns.map((col) => col.name).join(","), values);
+        var sql = "INSERT INTO {0} ({1}) VALUES({2})".format(clazz.tablename, clazz.columns.map((col) => col.name).join(","), values);
         try {
             console.log("[DB - CREATE]:", sql);
-            this.db.run(sql, data, function(error) {
+            this.db.run(sql, function(error) {
                 if (!thiz._isError(error) && callback) callback(thiz.lastID);
             });
         } catch(error) {
@@ -156,13 +171,11 @@ var DataAdapter = (function() {
         console.log("Get all:", clazz.tablename, (condition ? " with condition " + condition.build() : ""));
         var thiz = this;
         if (!this.db) this.db = getConnection();
-        var sql = String.format("SELECT {0} FROM {1} {2}",
-                    "rowid oid, " + clazz.columns.map((col)=> col.name).join(),
-                    clazz.tablename,
-                    condition ? condition.toString() : "");
+        var sql = "SELECT * FROM {0} {1} {2}";
+        sql = sql.format(clazz.tablename, condition ? condition.toString() : "", orders ? order.toString() : "");
         console.log("### SQL:", sql);
         try {
-            db.all("SELECT * FROM $tablename $where", [], function(error, result) {
+            this.db.all(sql, function(error, result) {
                 if (!thiz._isError(error) && callback) callback(result);
             });
         } catch(error) {
@@ -176,10 +189,12 @@ var DataAdapter = (function() {
         console.log("[DB - COUNT]:", sql);
         var thiz = this;
         if (!this.db) this.db = getConnection();
-        var sql = "";
+        var sql = "SELECT count(*) count FROM {0} {1}";
+        sql = sql.format(clazz.tablename, condition ? condition.toString() : "");
         try {
-            this.db.get("SELECT count(*) FROM $tablename $where", {$tablename: clazz.tablename, $where: condition.toString()}, function(error, data) {
-                if (!thiz._isError(error) && callback) callback(data);
+            console.log("[DB - COUNT]:", sql);
+            this.db.get(sql, function(error, data) {
+                if (!thiz._isError(error) && callback) callback(data.count);
             });
         } catch(error) {
             this._onError(error);
@@ -207,21 +222,18 @@ var DataAdapter = (function() {
         if (!this.db) this.db = getConnection();
         try {
             this.beginTransaction(function(pool) {
-                pool.count(clazz, condition, function(error, count) {
-                    if (pool._isError(error) || count == 0) {
-                        if (callback) callback({count: 0, data: []});
+                pool.count(clazz, condition, function(total) {
+                    if (total == 0 && callback) {
+                        callback({count: 0, data: []});
                         return;
                     }
-                    var sql = "SELECT * FROM $tablename $where $order LIMIT $count OFFSET $offset";
+                    var sql = "SELECT * FROM {0} {1} {2} LIMIT {3} OFFSET {4}";
+                    sql = sql.format(clazz.tablename, condition ? condition.toString() : "", orders ? orders.toString() : "", count, offset);
                     console.log("[DB - QUERY]:", sql);
-                    pool.all(sql, {
-                            $where: condition.toString(), $order: (orders ? "ORDER BY" + orders.toString() : ""),
-                            $count: count, $offset: offset
-                        },
-                        function(error, data) {
-                            if (!pool._onError(error) && callback) callback({count: count, data: data});
-                            pool.commit();
-                        });
+                    pool.db.all(sql, function(error, data) {
+                        if (!pool._isError(error) && callback) callback({count: total, data: data});
+                        pool.commit();
+                    });
                 });
             });
         } catch(error) {
