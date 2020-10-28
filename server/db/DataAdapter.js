@@ -26,58 +26,88 @@ var DataAdapter = (function() {
                 return value ? value : 0;
         }
     }
+    function object2DBKeys(obj) {
+        var dataset = {};
+        for (key in Object.keys(obj)) {
+            dataset["$" + key] = obj[key];
+        }
+        return dataset;
+    }
     function DB(connection) {
         this.db = connection;
         this.transactional = false;
     }
+    DB.prototype._isError = function(error) {
+        if (error) {
+            this.onError(error);
+            return true;
+        }
+        return false;
+    };
+    DB.prototype._onError = function(error) {
+        console.log("[ERROR]", error);
+        if (this.transactional) this.db.exec("ROLLBACK");
+    };
     DB.prototype.beginTransaction = function(callback) {
+        var thiz = this;
         if (!this.db) this.db = getConnection();
-        console.log("[DB - Begin Transaction]");
-        this.db.exec("BEGIN", function(error) {
-            if (error) console.log("[ERROR]", error);
-            if (callback) callback();
-        });
-        // db.exec("ROLLBACK");
-        // db.exec("COMMIT");
+        try {
+            console.log("[DB - Begin Transaction]");
+            this.db.exec("BEGIN", function(error) {
+                if (!thiz._isError(error) && callback) callback(thiz);
+            });
+            // db.exec("ROLLBACK");
+            // db.exec("COMMIT");
+        } catch(error) {
+            this.close();
+        }
     };
     DB.prototype.commit = function() {
-        if (this.db) this.db.exec("COMMIT");
+        try {
+            if (!this.db) return;
+            this.db.exec("COMMIT");
+        } catch(error) {
+            this._onError(error);
+        } finally {
+            this.close();
+        }
+    };
+    DB.prototype.close = function() {
+        this.db.close();
     };
     DB.prototype.create = function(clazz, callback) {
-        console.log("Create:", clazz.tablename, data);
+        var thiz = this;
         if (!this.db) this.db = getConnection();
         var sql = String.format("CREATE TABLE {0} ({1})", clazz.tablename, clazz.columns.map(col => {
             return col.name + " " + col.datatype + (col.pk ? " PRIMARY KEY" : "") + (col.unique ? " UNIQUE" : "");
         }).join(", "));
-        console.log("[DB - Execute]:", sql);
         try {
-            this.db.run(sql, [], function(output) {
-                if (callback) callback(output);
+            console.log("[DB - Execute]:", sql);
+            this.db.run(sql, [], function(error) {
+                if (!thiz._isError(error) && callback) callback();
             });
         } catch(error) {
-            console.log("[ERROR]", error);
-            if (this.transactional) this.db.exec("ROLLBACK");
+            this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close()
+            this.close();
         }
     }
     DB.prototype.insert = function(clazz, object, callback) {
+        var thiz = this;
         if (!this.db) this.db = getConnection();
         var data = [];
         clazz.columns.map(col => {
             return convertDataByType(object[col.name], col.datatype);
         }).join(",");
         var sql = String.format("INSERT INTO {0} ({1}) VALUES({2})", clazz.tablename, clazz.columns.map((col) => col.name).join(","), values);
-        console.log("[DB - CREATE]:", sql);
         try {
-            this.db.run(sql, data, function(output) {
-                    if (callback) callback(output);
-                }
-            );
+            console.log("[DB - CREATE]:", sql);
+            this.db.run(sql, data, function(error) {
+                if (!thiz._isError(error) && callback) callback(thiz.lastID);
+            });
         } catch(error) {
-            console.log("[ERROR]", error);
-            if (this.transactional) this.db.exec("ROLLBACK");
+            this._onError(error);
         } finally {
             if (this.transactional) return;
             this.db.close();
@@ -88,23 +118,43 @@ var DataAdapter = (function() {
     };
     DB.prototype.update = function(clazz, data, condition, callback) {
         console.log("Update:", clazz.tablename, data);
-        var conn = getConnection();
-        var values = Object.keys(data).forEach((key) => {
-
-        });
-        var sql = String.format("UPDATE {0} SET {1} {2}", clazz.tablename, values, condition.toString());
-        // conn.run("UPDATE ...");
+        var thiz = this;
+        if (!this.db) this.db = getConnection();
+        var setStr = Object.keys(data).map((key) => {
+            return (key + " = $" + key);
+        }).join(", ");
+        try {
+            this.db.run("UPDATE $tablename SET " + setStr + " $where",
+                {$tablename: clazz.tablename, ...object2DBKeys(values), $where: condition.toString()},
+                function(error) {
+                    if (!thiz._isError(error) && callback) callback();
+                });
+        } catch(error) {
+            this._onError(error);
+        } finally {
+            if (this.transactional) return;
+            this.db.close();
+        }
     };
     DB.prototype.deleteById = function(clazz, id, callback) {
         console.log("Delete:", clazz.tablename, id);
-        var conn = getConnection();
-        // conn.run("DELETE ...");
+        var thiz = this;
+        if (!this.db) this.db = getConnection();
+        try {
+            // this.db.run("DELETE ...");
+        } catch(error) {
+            this._onError(error);
+        } finally {
+            if (this.transactional) return;
+            this.close();
+        }
     };
     DB.prototype.batchDelete = function(clazz, condition, callback) {
         console.log("[DB - Batch Delete]:");
     };
     DB.prototype.getAll = function(clazz, condition, orders, callback) {
         console.log("Get all:", clazz.tablename, (condition ? " with condition " + condition.build() : ""));
+        var thiz = this;
         if (!this.db) this.db = getConnection();
         var sql = String.format("SELECT {0} FROM {1} {2}",
                     "rowid oid, " + clazz.columns.map((col)=> col.name).join(),
@@ -112,29 +162,41 @@ var DataAdapter = (function() {
                     condition ? condition.toString() : "");
         console.log("### SQL:", sql);
         try {
-            db.all("SELECT * FROM $tablename $where", [], function(err, result) {
-                console.log("### getAll:", err, result);
-                if (!err) callback(result);
+            db.all("SELECT * FROM $tablename $where", [], function(error, result) {
+                if (!thiz._isError(error) && callback) callback(result);
             });
         } catch(error) {
-            console.log("[SQL - ERROR]", error);
+            this._onError(error);
         } finally {
             if (this.transactional) return;
             this.db.close();
         }
     };
     DB.prototype.count = function(clazz, condition, callback) {
-            var sql = "";
-            console.log("[DB - COUNT]:", sql);
-        };
+        console.log("[DB - COUNT]:", sql);
+        var thiz = this;
+        if (!this.db) this.db = getConnection();
+        var sql = "";
+        try {
+            this.db.get("SELECT count(*) FROM $tablename $where", {$tablename: clazz.tablename, $where: condition.toString()}, function(error, data) {
+                if (!thiz._isError(error) && callback) callback(data);
+            });
+        } catch(error) {
+            this._onError(error);
+        } finally {
+            if (this.transactional) return;
+            this.db.close();
+        }
+    };
     DB.prototype.getById = function(clazz, id, callback) {
-        console.log("Get by Id:", clazz.tablename, id);
+        console.log("[DB - Get by Id]:", clazz.tablename, id);
         if (!this.db) this.db = getConnection();
         try {
-            this.db.get("SELECT * FROM $tablename WHERE id = $id", {$tablename: clazz.tablename, $id: id}, callback);
+            this.db.get("SELECT * FROM $tablename WHERE id = $id", {$tablename: clazz.tablename, $id: id}, function(error, data) {
+                if (!this._isError(error) && callback) callback(data);
+            });
         } catch(error) {
-            console.log("[ERROR]", error);
-            if (this.transactional) this.db.exec("ROLLBACK");
+            this._onError(error);
         } finally {
             if (this.transactional) return;
             this.db.close();
@@ -144,17 +206,26 @@ var DataAdapter = (function() {
         console.log("Query by condition: ", clazz.tablename, condition);
         if (!this.db) this.db = getConnection();
         try {
-            this.db.all("SELECT * FROM $tablename $where $order LIMIT $count OFFSET $offset",
-                {
-                    $where: condition.toString(), $order: (orders ? "ORDER BY" + orders.toString() : ""),
-                    $count: count, $offset: offset
-                },
-                function(data) {
-                    if (callback) callback(data);
+            this.beginTransaction(function(pool) {
+                pool.count(clazz, condition, function(error, count) {
+                    if (pool._isError(error) || count == 0) {
+                        if (callback) callback({count: 0, data: []});
+                        return;
+                    }
+                    var sql = "SELECT * FROM $tablename $where $order LIMIT $count OFFSET $offset";
+                    console.log("[DB - QUERY]:", sql);
+                    pool.all(sql, {
+                            $where: condition.toString(), $order: (orders ? "ORDER BY" + orders.toString() : ""),
+                            $count: count, $offset: offset
+                        },
+                        function(error, data) {
+                            if (!pool._onError(error) && callback) callback({count: count, data: data});
+                            pool.commit();
+                        });
                 });
+            });
         } catch(error) {
-            console.log("[ERROR]", error);
-            if (this.transactional) this.db.exec("ROLLBACK");
+            this._onError(error);
         } finally {
             if (this.transactional) return;
             this.db.close();

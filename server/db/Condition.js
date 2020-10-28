@@ -28,7 +28,7 @@ Condition.prototype.build = function() {
     return queryStr;
 }
 
-Condition.__proto__ = function() {
+Condition.__proto__ = (function() {
     function isolateDataType(data) {
         return typeof(data) != "number" ? "'" + data + "'" : data;
     }
@@ -67,4 +67,6 @@ Condition.__proto__ = function() {
             return new Condition(" " + name + " LIKE '%" + value + "%'");
         }
     }
-}();
+})();
+
+module.exports = Condition;
