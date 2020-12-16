@@ -1,4 +1,14 @@
 module.exports = {
     PORT: 3000,
-    DB: "mongodb://localhost:27017/chat-room"
+    MONGODB: "mongodb://localhost:27017/chat-room",
+    STATIC: "/etc/dataview/static/",
+
+    DB_DRIVER: "org.postgresql.Driver",
+    DB_USER: "postgres",
+    DB_PASSWORD: "postgres",
+
+    SMTP_SERVER: "localhost",
+    SMTP_USERNAME: "",
+    SMTP_PASSWORD: "",
+    SMTP_PORT: 5252
 };

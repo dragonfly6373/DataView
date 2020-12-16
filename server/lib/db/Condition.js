@@ -12,6 +12,9 @@ Condition.prototype = {
     or: function(condition) {
         this.queue.push({operator: " OR", condition: condition});
         return this;
+    },
+    not: function(condition) {
+        this.queue.push({operator: " NOT", condition: condition});
     }
 }
 

@@ -2,7 +2,7 @@ var Model = (function() {
     return {
         User: {
             tablename:"user",
-            columns: [
+            datafields: [
                 {fieldname: "id", datatype: DataType.INT, pk: true},
                 {name: "name", datatype: DataType.TEXT},
                 {name: "email", datatype: DataType.TEXT},

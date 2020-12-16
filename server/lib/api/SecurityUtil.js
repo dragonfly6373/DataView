@@ -1,5 +1,3 @@
-var chatController = require('../controller/chat-controller.js');
-var USER_ROLES = require('../mongodb/model/User.js').USER_ROLES;
 
 var session = {
     getCurrentLogin: function(req) {
@@ -22,7 +20,7 @@ var requestAuthen = (function() {
         },
         SYSTEM_ADMIN: function(req) {
             var userInfo = session.getCurrentLogin(req);
-            if (userInfo && userInfo.userRole == USER_ROLES.ADMIN) return true;
+            if (userInfo && userInfo.userRole == "admin") return true;
             return false;
         },
         accountRequireRole: function(minimumRole) {
@@ -30,26 +28,9 @@ var requestAuthen = (function() {
                 var userInfo = session.getCurrentLogin(req);
                 return (userInfo.userRole >= minimumRole);
             };
-        },
-        roomRequireRole: function(room_id, minimumRole) {
-            return function(req) {
-                var userInfo = session.getCurrentLogin(req);
-                var isRoomAdmin = new Promise(function(resolve, reject) {
-                    chatController.getGroupInfo.implementation.apply(null, room_id, function(error, data) {
-                        if (error) reject();
-                        else if (data.roomAdmin.id == userInfo.id) {
-                            resolve(true);
-                        } else {
-                            reject();
-                        }
-                    });
-                });
-                return isRoomAdmin;
-            };
         }
     };
 })();
 
 module.exports.session = session;
 module.exports.requestAuthen = requestAuthen;
-module.exports.USER_ROLES = USER_ROLES;

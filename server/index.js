@@ -1,9 +1,6 @@
 exports.properties = require('./properties.js');
-exports.serviceBuilder = require('./service/ServiceBuilder.js');
-exports.mongodb = require('./mongodb/database.js');
-exports.SecurityUtil = require('./service/SecurityUtil.js');
+exports.serviceBuilder = require('./lib/api/ServiceBuilder.js');
+exports.SecurityUtil = require('./lib/api/SecurityUtil.js');
 exports.controller = {
-    chat: require('./controller/chat-controller.js'),
-    user: require('./controller/user-controller.js')
+    user: require('./controller/user-controller')
 };
-exports.socketIO = require('./SocketServer.js');

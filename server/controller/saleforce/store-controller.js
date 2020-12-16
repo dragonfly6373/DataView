@@ -1,6 +1,6 @@
 var {DB, Condition, Order} = require("../lib/db");
 var User = require("../model/User");
-var security = require("../lib/api/SecurityUtil");
+var security = require("../lib/service/SecurityUtil");
 
 var requestAuthen = security.requestAuthen;
 var session = security.session;
