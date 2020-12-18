@@ -1,38 +1,39 @@
-function DbJoin() {
-    this.joinType = "";
-    this.model = null;
-    this.alias = "";
+function DbJoin(jointype, model, alias) {
+    this.joinType = jointype;
+    this.model = model;
+    this.alias = alias || model.tablename;
     this.condition = [];
 }
 DbJoin.JoinType = {
-    LEFT: "LEFT",
-    RIGHT: "RIGHT",
-    INNER: "INNER",
-    OUTER: "OUTTER"
+    LEFT: "LEFT JOIN",
+    RIGHT: "RIGHT JOIN",
+    INNER: "INNER JOIN",
+    OUTER: "OUTTER JOIN"
 }
 
-DbJoin.prototype.ON = function(condition) {
+DbJoin.prototype.as = function(alias) {
+    this.alias = alias;
+    return this;
+};
+
+DbJoin.prototype.on = function(condition) {
     this.condition = condition;
     return this;
 };
 
 DbJoin.prototype.toString = function() {
-    return " " + this.joinType + " " + this.model.tablename + " ON " + this.condition.build();
+    return " " + this.joinType + " " + this.model.tablename + " AS " + this.alias + " ON " + this.condition.build();
 };
 
 function createJoin(joinType) {
-    var dbjoin = new DbJoin();
-    dbjoin.joinType = joinType;
     return (function(model, alias) {
-            this.model = model;
-            this.alias = alias;
-            return this;
-        }).bind(dbjoin);
+        return new DbJoin(joinType, model, alias);
+    });
 }
 
 module.exports = {
-    LEFT: createJoin(DbJoin.LEFT),
-    RIGHT: createJoin(DbJoin.RIGHT),
-    OUTTER: createJoin(DbJoin.OUTTER),
-    INNER: createJoin(DbJoin.INNER)
+    leftJoin: createJoin(DbJoin.JoinType.LEFT),
+    rightJoin: createJoin(DbJoin.JoinType.RIGHT),
+    outerJoin: createJoin(DbJoin.JoinType.OUTTER),
+    innerJoin: createJoin(DbJoin.JoinType.INNER)
 };

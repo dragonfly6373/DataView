@@ -3,6 +3,7 @@ var DataType = DB.DataType;
 
 var Account = require("../../model/Account");
 var Store = require("../../model/Store");
+var StoreAccountSetting = require("./StoreAccountSetting");
 
 module.exports = {
     tablename:"store_account_setting",
@@ -11,12 +12,11 @@ module.exports = {
         DbJoin.LEFT(Store, "store").ON(Condition.eqProperty("store_id", "store.id"))
     ],
     datafields: {
-        id: {datatype: DataType.INT, pk: true},
-        accountId: {mapping: "account_id", datatype: DataType.INT},
-        storeId: {mapping: "store_id", datatype: DataType.INT},
-        adminType: {mapping: "admin_type", datatype: DataType.INT},
-        createdDate: {mapping: "created_date", datatype: DataType.DateTime},
-        status: {datatype: DataType.INT},
-        deleted: {datatype: DataType.INT}
-    }
+        ...StoreAccountSetting.datafields,
+        accountName: {mapping: "acc.name", datatype: DataType.TEXT},
+        storeName: {mapping: "store.name", datatype: DataType.TEXT},
+        storeAddress: {mapping: "store.address", datatype: DataType.TEXT},
+        storeStatus: {mapping: "store.status", datatype: DataType.TEXT}
+    },
+    without_rowid: true
 };

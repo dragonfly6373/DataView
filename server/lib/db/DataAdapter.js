@@ -37,27 +37,52 @@ var DataAdapter = (function() {
         if (!type) return DataType.INT.sql_type;
         return type.sql_type;
     }
-    function convertDataByType(value, datatype) {
+    function convertSqlType(value, datatype) {
         var type = (datatype instanceof Object ? datatype : DataType[datatype.toUpperCase()]);
-        switch(type) {
-            case DataType.INT:
-            case DataType.REAL:
-            case DataType.NUMERIC:
-                return value ? value : 0;
-            case DataType.TEXT:
-            case DataType.BLOB:
-                return "'" + value + "'";
-            case DataType.DateTime:
+        switch(type.code) {
+            case DataType.BOOLEAN.code:
+                return value ? 1 : 0;
+            case DataType.DATETIME.code:
                 return value.getTime();
             default:
-                return value ? value : 0;
+                return value;
         }
+    }
+    function convertDataType(value, datatype) {
+        var type = (datatype instanceof Object ? datatype : DataType[datatype.toUpperCase()]);
+        switch(type.code) {
+            case DataType.BOOLEAN.code:
+                return value > 0;
+            case DataType.DATETIME.code:
+                return new Date(value);
+            default:
+                return value;
+        }
+    }
+    function getConstraints(clazz) {
+        if (!clazz.constraints || !clazz.constraints.length) return null;
+        return clazz.constraints.map(c => {
+            if (c.pk) {
+                if (c.pk instanceof Array) return "CONSTRAINT PRIMARY KEY (" + c.pk.join(", ") + ")";
+                if (typeof c.pk === "string") return "CONSTRAINT PRIMARY KEY (" + c.pk + ")";
+            }
+            if (c.fk) {
+                return "FOREIGN KEY(" + c.fk + ") REFERENCES " + c.ref.table.tablename + "(" + c.ref.column + ")";
+            }
+            return "";
+        });
+    }
+    function getExtraColumn(clazz) {
+        var extras = Object.values(clazz.datafields).filter(col => {
+            return (col.formular != null && col.formular != undefined);
+        }).map(col => (col.formular + " as " + col.alias));
+        return extras;
     }
     function mappingDb2Model(data, clazz) {
         return Object.keys(clazz.datafields).reduce(function(a, c) {
             var f = clazz.datafields[c];
-            var k = f.mapping || c;
-            a[c] = data[k];
+            var k = f.alias || f.mapping || c;
+            a[c] = convertDataType(data[k], f.datatype);
             return a;
         }, {});
     }
@@ -138,7 +163,7 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.create = function(clazz, options, callback) {
+    DB.prototype.create = function(clazz, callback) {
         var thiz = this;
         var columns = Object.keys(clazz.datafields).filter(f => {
                 f = clazz.datafields[f].mapping || f;
@@ -153,9 +178,13 @@ var DataAdapter = (function() {
                     + (f.unique ? " UNIQUE" : "");
                 return s;
             });
+        var constraints = getConstraints(clazz);
+        console.log("# Constraints:", constraints);
         var sql = "CREATE TABLE IF NOT EXISTS "
-                + clazz.tablename + "(" + columns.join(", ") + ")"
-                + (options && options.withoutrowid ? "WITHOUT ROWID" : "");
+                + clazz.tablename + "(" + columns.join(", ")
+                + (constraints && constraints.length ? ", " + constraints.join(", ") : "")
+                + ")"
+                + (clazz.without_rowid ? " WITHOUT ROWID" : "");
         try {
             if (!this.db) this.db = getConnection();
             console.log("[DB - Execute]:", sql);
@@ -177,20 +206,20 @@ var DataAdapter = (function() {
         var fields = [];
         columns.forEach(c => {
             var f = clazz.datafields[c];
-            values.push(convertDataByType(object[c], f.datatype));
+            values.push(convertSqlType(object[c], f.datatype));
             fields.push((f.mapping || c));
         });
         var sql = "INSERT INTO {0} ({1}) VALUES({2})".format(clazz.tablename, fields.join(","), values.map(f => "?").join(","));
         try {
             console.log("[DB - CREATE]:", sql);
             this.db.run(sql, values, function(error) {
-                if (!thiz._isError(error) && callback) callback(thiz.db.lastID);
+                if (!thiz._isError(error) && callback) callback(thiz.db.last_id);
             });
         } catch(error) {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.insertMulti = function(clazz, list, callback) {
@@ -216,7 +245,7 @@ var DataAdapter = (function() {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.deleteById = function(clazz, id, callback) {
@@ -248,33 +277,40 @@ var DataAdapter = (function() {
         } catch(error) {
             this._onError(error);
         } finally {
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.getAll = function(clazz, condition, orders, callback) {
         var thiz = this;
-        var sql = "SELECT rowid, * FROM " + clazz.tablename
+        var extras = getExtraColumn(clazz);
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+                + (extras && extras.length ? ", " + extras.join(", ") : "")
+                + " FROM " + clazz.tablename + " _root"
+                + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
                 + (condition ? " " + condition.toString() : "")
                 + (orders ? " " + orders.toString() : "");
         console.log("[DB - GET ALL]:", sql);
         try {
             if (!this.db) this.db = getConnection();
             this.db.all(sql, function(error, data) {
-                if (!thiz._isError(error) && callback) callback(data.map((d) => mappingDb2Model(d, clazz)));
+                if (!thiz._isError(error) && callback) {
+                    callback(data.map((d) => mappingDb2Model(d, clazz)));
+                }
             });
         } catch(error) {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.count = function(clazz, condition, callback) {
         console.log("[DB - COUNT]:", sql);
         var thiz = this;
         if (!this.db) this.db = getConnection();
-        var sql = "SELECT count(*) count FROM {0} {1}";
-        sql = sql.format(clazz.tablename, condition ? condition.toString() : "");
+        var sql = "SELECT count(*) count FROM "
+                + clazz.tablename + " _root"
+                + (condition ? " " + condition.toString() : "");
         try {
             console.log("[DB - COUNT]:", sql);
             this.db.get(sql, function(error, data) {
@@ -284,14 +320,14 @@ var DataAdapter = (function() {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.getById = function(clazz, id, callback) {
         console.log("[DB - Get by Id]:", clazz.tablename, id);
-        var sql = "SELECT " + clazz.withoutrowid ? "" : "rowid, "
-                + "* FROM $tablename WHERE "
-                + (clazz.withoutrowid ? "id" : "rowid") + " = $id";
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ")
+                + "_root.* FROM $tablename _root WHERE "
+                + (clazz.without_rowid ? "id" : "rowid") + " = $id";
         try {
             if (!this.db) this.db = getConnection();
             this.db.get(sql, {$tablename: clazz.tablename, $id: id}, function(error, data) {
@@ -306,11 +342,10 @@ var DataAdapter = (function() {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
     };
     DB.prototype.query = function(clazz, condition, orders, offset, count, callback) {
-        console.log("Query by condition: ", clazz.tablename, condition);
         try {
             if (!this.db) this.db = getConnection();
             this.beginTransaction(function(pool) {
@@ -319,13 +354,19 @@ var DataAdapter = (function() {
                         callback({count: 0, data: []});
                         return;
                     }
-                    var sql = "SELECT " + (clazz.withoutrowid ? "" : "rowid, ") + "* FROM " + clazz.tablename
+                    var extras = getExtraColumn(clazz);
+                    var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+                            + (extras && extras.length ? ", " + extras.join(", ") : "")
+                            + " FROM " + clazz.tablename + " _root"
+                            + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
                             + (condition ? " " + condition.toString() : "")
                             + (orders ? " " + orders.toString() : "")
                             + " LIMIT " + count + " OFFSET " + offset;
                     console.log("[DB - QUERY]:", sql);
                     pool.db.all(sql, function(error, data) {
-                        if (!pool._isError(error) && callback) callback({count: total, data: data.map((d) => mappingDb2Model(d, clazz))});
+                        if (!pool._isError(error) && callback) {
+                            callback({count: total, data: data.map((d) => mappingDb2Model(d, clazz))});
+                        }
                         pool.commit();
                     });
                 });
@@ -334,8 +375,15 @@ var DataAdapter = (function() {
             this._onError(error);
         } finally {
             if (this.transactional) return;
-            this.db.close();
+            this.close();
         }
+    };
+    DB.subQuery = function(clazz, projection_field, condition, orders, offset, count) {
+        var sql = "SELECT " + clazz.tablename + "." + projection_field + " FROM " + clazz.tablename
+                + (condition ? " " + condition.setContext({alias: clazz.tablename}).toString() : "")
+                + (orders ? " " + orders.setContext({alias: clazz.tablename}).toString() : "")
+                + (arguments.length > 4 ? (" LIMIT " + count + " OFFSET " + offset) : "");
+        return sql;
     };
     return {
         config: function(options, callback) {
@@ -348,11 +396,11 @@ var DataAdapter = (function() {
             var clazz = arguments[0];
             var forceDrop = arguments.length > 2 ? arguments[1] : false;
             var callback = arguments[arguments.length - 1];
-            if (!forceDrop) new DB(getConnection()).create(clazz, null, callback);
+            if (!forceDrop) new DB(getConnection()).create(clazz, callback);
             else {
                 new DB(getConnection()).beginTransaction(function(pool) {
                     pool.dropTable(clazz, function() {
-                        pool.create(clazz, null, function() {
+                        pool.create(clazz, function() {
                             callback();
                             pool.close();
                         });
@@ -361,12 +409,12 @@ var DataAdapter = (function() {
             }
         },
         createIfNotExists: function(clazz, callback) {
-            new DB(getConnection()).create(clazz, {if_not_exists: true}, callback);
+            new DB(getConnection()).create(clazz, callback);
         },
         createOrReplace: function(clazz, callback) {
             new DB(getConnection()).beginTransaction(function(pool) {
                 pool.dropTable(clazz, function() {
-                    pool.create(clazz, null, function() {
+                    pool.create(clazz, function() {
                         callback();
                         pool.close();
                     });
@@ -403,6 +451,7 @@ var DataAdapter = (function() {
         query: function(clazz, condition, orders, offset, count, callback) {
             new DB(getConnection()).query(clazz, condition, orders, offset, count, callback);
         },
+        subQuery: DB.subQuery,
         DataType: DataType
     }
 })();
