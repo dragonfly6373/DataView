@@ -14,7 +14,11 @@ var DataAdapter = (function() {
         DOUBLE:     { code: 6, sql_type: "REAL" },
         FLOAT:      { code: 7, sql_type: "REAL" },
         BOOLEAN:    { code: 8, sql_type: "INTEGER" },
-        DATETIME:   { code: 9, sql_type: "INTEGER" }
+        DATETIME:   { code: 9, sql_type: "INTEGER" },
+        INT_ARRAY:  { code: 10, sql_type: "TEXT"},
+        STRING_ARRAY:  { code: 11, sql_type: "TEXT"},
+        DATE_ARRAY: { code: 12, sql_type: "TEXT"},
+        JSON:       { code: 13, sql_type: "TEXT"}
     };
     function setupDb(options) {
         if (!options) return;
@@ -44,6 +48,12 @@ var DataAdapter = (function() {
                 return value ? 1 : 0;
             case DataType.DATETIME.code:
                 return value.getTime();
+            case DataType.INT_ARRAY.code:
+            case DataType.STRING_ARRAY.code:
+            case DataType.JSON.code:
+                return JSON.stringify(value);
+            case DataType.DATE_ARRAY.code:
+                return JSON.stringify(value.map(v => v.getTime()));
             default:
                 return value;
         }
@@ -55,6 +65,11 @@ var DataAdapter = (function() {
                 return value > 0;
             case DataType.DATETIME.code:
                 return new Date(value);
+            case DataType.INT_ARRAY.code:
+            case DataType.STRING_ARRAY.code:
+                return JSON.parse(value);
+            case DataType.DATE_ARRAY.code:
+                return JSON.parse(value).map(v => new Date(v));
             default:
                 return value;
         }
@@ -82,7 +97,7 @@ var DataAdapter = (function() {
         return Object.keys(clazz.datafields).reduce(function(a, c) {
             var f = clazz.datafields[c];
             var k = f.alias || f.mapping || c;
-            a[c] = convertDataType(data[k], f.datatype);
+            a[c] = f.ignore ? "" : convertDataType(data[k], f.datatype);
             return a;
         }, {});
     }
@@ -213,7 +228,7 @@ var DataAdapter = (function() {
         try {
             console.log("[DB - CREATE]:", sql);
             this.db.run(sql, values, function(error) {
-                if (!thiz._isError(error) && callback) callback(thiz.db.last_id);
+                if (!thiz._isError(error) && callback) callback(this.lastID);
             });
         } catch(error) {
             this._onError(error);
@@ -225,7 +240,7 @@ var DataAdapter = (function() {
     DB.prototype.insertMulti = function(clazz, list, callback) {
         console.log("Insert Multi:", clazz.tablename, data);
     };
-    DB.prototype.update = function(clazz, data, condition, callback) {
+    DB.prototype.update = function(clazz, data, conditions, callback) {
         console.log("Update:", clazz.tablename, data);
         data = mappingModel2Db(data, clazz);
         var thiz = this;
@@ -234,12 +249,12 @@ var DataAdapter = (function() {
             console.log(" . ", key);
             return (key + " = ?");
         }).join(", ");
-        var sql = "UPDATE " + clazz.tablename + " SET " + setStr + " " + (condition ? condition.toString() : "");
+        var sql = "UPDATE " + clazz.tablename + " AS _root" + " SET " + setStr + " " + (conditions ? conditions.toString() : "");
         try {
             console.log("# update string: ", sql, Object.values(data));
             this.db.run(sql, Object.values(data),
-                function(error) {
-                    if (!thiz._isError(error) && callback) callback();
+                function(error, result) {
+                    if (!thiz._isError(error) && callback) callback(result);
                 });
         } catch(error) {
             this._onError(error);
@@ -248,31 +263,15 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.deleteById = function(clazz, id, callback) {
-        console.log("Delete:", clazz.tablename, id);
-        var thiz = this;
-        var sql = "DELETE FROM " + clazz.tablename + " " + Condition.eq("id", id).toString();
-        try {
-            if (!this.db) this.db = getConnection();
-            this.db.run(sql, function(error) {
-                    if (!thiz._isError(error) && callback) callback();
-                });
-        } catch(error) {
-            this._onError(error);
-        } finally {
-            if (this.transactional) return;
-            this.close();
-        }
-    };
-    DB.prototype.batchDelete = function(clazz, condition, callback) {
+    DB.prototype.delete = function(clazz, conditions, callback) {
         console.log("[DB - Batch Delete]:");
         var thiz = this;
-        var sql = "DELETE FROM " + clazz.tablename + " " + condition.toString();
+        var sql = "DELETE FROM " + clazz.tablename + " AS _root " + conditions.toString();
         try {
             if (!this.db) this.db = getConnection();
             this.db.run(sql,
-                function(error) {
-                    if (!thiz._isError(error) && callback) callback();
+                function(error, result) {
+                    if (!thiz._isError(error) && callback) callback(result);
                 });
         } catch(error) {
             this._onError(error);
@@ -280,14 +279,14 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.getAll = function(clazz, condition, orders, callback) {
+    DB.prototype.getAll = function(clazz, conditions, orders, callback) {
         var thiz = this;
         var extras = getExtraColumn(clazz);
         var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
                 + (extras && extras.length ? ", " + extras.join(", ") : "")
                 + " FROM " + clazz.tablename + " _root"
                 + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
-                + (condition ? " " + condition.toString() : "")
+                + (conditions ? " " + conditions.toString() : "")
                 + (orders ? " " + orders.toString() : "");
         console.log("[DB - GET ALL]:", sql);
         try {
@@ -304,13 +303,13 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.count = function(clazz, condition, callback) {
+    DB.prototype.count = function(clazz, conditions, callback) {
         console.log("[DB - COUNT]:", sql);
         var thiz = this;
         if (!this.db) this.db = getConnection();
         var sql = "SELECT count(*) count FROM "
                 + clazz.tablename + " _root"
-                + (condition ? " " + condition.toString() : "");
+                + (conditions ? " " + conditions.toString() : "");
         try {
             console.log("[DB - COUNT]:", sql);
             this.db.get(sql, function(error, data) {
@@ -335,7 +334,7 @@ var DataAdapter = (function() {
                     var result = data.map((d) => {
                         return mappingDb2Model(d, clazz);
                     });
-                    callback(result);
+                    callback(result.length ? result[0] : null);
                 }
             });
         } catch(error) {
@@ -345,11 +344,37 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.query = function(clazz, condition, orders, offset, count, callback) {
+    DB.prototype.getFirst = function(clazz, conditions, orders, callback) {
+        var thiz = this;
+        var extras = getExtraColumn(clazz);
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+                + (extras && extras.length ? ", " + extras.join(", ") : "")
+                + " FROM " + clazz.tablename + " _root"
+                + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
+                + (conditions ? " " + conditions.toString() : "")
+                + (orders ? " " + orders.toString() : "")
+                + " LIMIT " + 1 + " OFFSET " + 0;
+        console.log("[DB - GET FIRST]:", sql);
+        try {
+            if (!this.db) this.db = getConnection();
+            this.db.all(sql, function(error, data) {
+                if (!thiz._isError(error) && callback) {
+                    var result = data.map((d) => mappingDb2Model(d, clazz));
+                    callback(result.length ? result[0] : null);
+                }
+            });
+        } catch(error) {
+            this._onError(error);
+        } finally {
+            if (this.transactional) return;
+            this.close();
+        }
+    };
+    DB.prototype.query = function(clazz, conditions, orders, offset, count, callback) {
         try {
             if (!this.db) this.db = getConnection();
             this.beginTransaction(function(pool) {
-                pool.count(clazz, condition, function(total) {
+                pool.count(clazz, conditions, function(total) {
                     if (total == 0 && callback) {
                         callback({count: 0, data: []});
                         return;
@@ -359,7 +384,7 @@ var DataAdapter = (function() {
                             + (extras && extras.length ? ", " + extras.join(", ") : "")
                             + " FROM " + clazz.tablename + " _root"
                             + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
-                            + (condition ? " " + condition.toString() : "")
+                            + (conditions ? " " + conditions.toString() : "")
                             + (orders ? " " + orders.toString() : "")
                             + " LIMIT " + count + " OFFSET " + offset;
                     console.log("[DB - QUERY]:", sql);
@@ -378,9 +403,9 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.subQuery = function(clazz, projection_field, condition, orders, offset, count) {
+    DB.subQuery = function(clazz, projection_field, conditions, orders, offset, count) {
         var sql = "SELECT " + clazz.tablename + "." + projection_field + " FROM " + clazz.tablename
-                + (condition ? " " + condition.setContext({alias: clazz.tablename}).toString() : "")
+                + (conditions ? " " + conditions.setContext({alias: clazz.tablename}).toString() : "")
                 + (orders ? " " + orders.setContext({alias: clazz.tablename}).toString() : "")
                 + (arguments.length > 4 ? (" LIMIT " + count + " OFFSET " + offset) : "");
         return sql;
@@ -390,7 +415,7 @@ var DataAdapter = (function() {
             setupDb(options);
         },
         beginTransaction: function(callback) {
-            new DB(getConnection()).beginTransaction(calback);
+            new DB(getConnection()).beginTransaction(callback);
         },
         create: function() {
             var clazz = arguments[0];
@@ -431,13 +456,13 @@ var DataAdapter = (function() {
             new DB(getConnection()).update(clazz, data, Condition.eq("id", data.id), callback);
         },
         deleteById: function(clazz, id, callback) {
-            new DB(getConnection()).deleteById(clazz, id, callback);
+            new DB(getConnection()).delete(clazz, Condition.eq("id", id), callback);
         },
         batchUpdate: function(clazz, values, condition, callback) {
             new DB(getConnection()).update(clazz, values, condition, callback);
         },
         batchDelete: function(clazz, condition, callback) {
-            new DB(getConnection()).batchDelete(clazz, condition, callback);
+            new DB(getConnection()).delete(clazz, condition, callback);
         },
         getAll: function(clazz, condition, orders, callback) {
             new DB(getConnection()).getAll(clazz, condition, orders, callback);
@@ -447,6 +472,9 @@ var DataAdapter = (function() {
         },
         getById: function(clazz, id, callback) {
             new DB(getConnection()).getById(clazz, id, callback);
+        },
+        getFirst: function(clazz, condition, order, callback) {
+            new DB(getConnection()).getFirst(clazz, condition, order, callback);
         },
         query: function(clazz, condition, orders, offset, count, callback) {
             new DB(getConnection()).query(clazz, condition, orders, offset, count, callback);

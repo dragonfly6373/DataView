@@ -42,7 +42,7 @@ var CommonNet = (function () {
             }
             if (mime) request.overrideMimeType(mime);
             // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            console.log("## send request: ", method, url, data);
+            // console.log("## send request: ", method, url, data);
             request.send(data);
             if (listener) listener.busy();
         };
@@ -66,7 +66,7 @@ var CommonNet = (function () {
                     for (var i = 0; i < requiredParams.length - 1; i++) {
                         params[requiredParams[i + 1]] = arguments[i];
                     }
-                    console.log("# call service:", service + method + " - ", requiredParams, params);
+                    // console.log("# call service:", service + method + " - ", requiredParams, params);
                     if (method.toUpperCase() == "POST") {
                         CommonNet.post("/" + api_name + "/" + service, params, arguments[requiredParams.length - 1], arguments[requiredParams.length]);
                     } else {

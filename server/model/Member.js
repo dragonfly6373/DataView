@@ -1,6 +1,8 @@
 const {DB} = require("../lib/db");
 var DataType = DB.DataType;
 
+const Account = require("./Account");
+
 var MemberStatus = {
     ACTIVE: {code: 10, name: "Active"},
     PENDDING: {code: 20, name: "Pendding"},
@@ -19,5 +21,8 @@ module.exports = {
         status: {datatype: "INT"},
         deleted: {datatype: "INT"}
     },
+    constrains: [
+        {fk: "account_id", ref: {table: Account, column: "rowid"}}
+    ],
     MemberStatus: MemberStatus
 };

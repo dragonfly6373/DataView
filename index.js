@@ -3,23 +3,31 @@ var webapp = express();
 var path = require('path');
 var http = require('http').createServer(webapp);
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var session = require('express-session')({secret: 'secret_is_secret', cookie: {maxAge: 3600000}});
 
-var {properties, serviceBuilder, controller} = require('server');
+var {properties, serviceBuilder, controllers} = require('server');
 
 webapp.use(cookieParser());
 webapp.use(session);
-webapp.use(express.json());
+webapp.use(bodyParser.urlencoded({ extended: false }));
+webapp.use(bodyParser.json());
 webapp.use(express.static(path.join(__dirname, 'web')));
 
 webapp.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '/web/index.html'));
 });
 
-// - Start APIs declaration - //
-var userApi = express.Router();
-webapp.use('/userService', userApi);
-serviceBuilder.register('userService', userApi, controller.user);
+serviceBuilder.load(webapp, express.Router, controllers);
+
+// controllers.map(controller => {
+//     var router = express.Router();
+//     webapp.use("/" + controller.name, router);
+// });
+/* - Start APIs declaration - */
+// var userApi = express.Router();
+// webapp.use('/userService', userApi);
+// serviceBuilder.register('userService', userApi, controller.user);
 
 webapp.get('/registry.js', (req, res) => {
 	res.send("window._registry = " + JSON.stringify(serviceBuilder.getAPIs()) + ";\nCommonNet.initServices(window._registry);");

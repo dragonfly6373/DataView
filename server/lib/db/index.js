@@ -1,6 +1,8 @@
 
-module.exports.Condition = require('./Condition');
-module.exports.DB = require('./DataAdapter');
-module.exports.Order = require('./Order');
-module.exports.DbJoin = require('./DbJoin');
-module.exports.Model = require('./Model');
+module.exports = {
+    Condition: require('./Condition'),
+    DB: require('./DataAdapter'),
+    Order: require('./Order'),
+    DbJoin: require('./DbJoin'),
+    Model: require('./Model')
+};

@@ -1,10 +1,11 @@
 
 package-lock.json
 node_modules
+node_modules/**/*
 
 server/package-lock.json
 server/node_modules
 
-server/db/package-lock.json
-server/db/node_modules
+server/lib/db/package-lock.json
+server/lib/db/node_modules
 

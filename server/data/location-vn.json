@@ -1,0 +1,3797 @@
+{
+    "name": "Viet Nam Adminitrative Units",
+    "description": "",
+    "data": [
+    {
+        "name": "Hà Nội",
+        "flag": [
+            "North"
+        ],
+        "data": [
+        {
+            "name": "Quận Ba Đình",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Cống Vị"
+            },
+            {
+                "name": "phường Điện Biên"
+            },
+            {
+                "name": "phường Đội Cấn"
+            },
+            {
+                "name": "phường Giảng Võ"
+            },
+            {
+                "name": "phường Kim Mã"
+            },
+            {
+                "name": "phường Liễu Giai"
+            },
+            {
+                "name": "phường Ngọc Hà"
+            },
+            {
+                "name": "phường Ngọc Khánh"
+            },
+            {
+                "name": "phường Nguyễn Trung Trực"
+            },
+            {
+                "name": "phường Phúc Xá"
+            },
+            {
+                "name": "phường Quán Thánh"
+            },
+            {
+                "name": "phường Thành Công"
+            },
+            {
+                "name": "phường Trúc Bạch"
+            },
+            {
+                "name": "phường Vĩnh Phúc"
+            }]
+        },
+        {
+            "name": "Quận Bắc Từ Liêm",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Cổ Nhuế 1"
+            },
+            {
+                "name": "phường Cổ Nhuế 2"
+            },
+            {
+                "name": "phường Đức Thắng"
+            },
+            {
+                "name": "phường Đông Ngạc"
+            },
+            {
+                "name": "phường Thụy Phương"
+            },
+            {
+                "name": "phường Liên Mạc"
+            },
+            {
+                "name": "phường Thượng Cát"
+            },
+            {
+                "name": "phường Tây Tựu"
+            },
+            {
+                "name": "phường Minh Khai"
+            },
+            {
+                "name": "phường Phú Diễn"
+            },
+            {
+                "name": "phường Phúc Diễn"
+            },
+            {
+                "name": "phường Xuân Đỉnh"
+            },
+            {
+                "name": "phường Xuân Tảo"
+            }]
+        },
+        {
+            "name": "Quận Cầu Giấy",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Dịch Vọng"
+            },
+            {
+                "name": "phường Dịch Vọng Hậu"
+            },
+            {
+                "name": "phường Mai Dịch"
+            },
+            {
+                "name": "phường Nghĩa Đô"
+            },
+            {
+                "name": "phường Nghĩa Tân"
+            },
+            {
+                "name": "phường Quan Hoa"
+            },
+            {
+                "name": "phường Trung Hòa"
+            },
+            {
+                "name": "phường Yên Hòa"
+            }]
+        },
+        {
+            "name": "Quận Đống Đa",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Cát Linh"
+            },
+            {
+                "name": "phường Hàng Bột"
+            },
+            {
+                "name": "phường Khâm Thiên"
+            },
+            {
+                "name": "phường Khương Thượng"
+            },
+            {
+                "name": "phường Kim Liên"
+            },
+            {
+                "name": "phường Láng Hạ"
+            },
+            {
+                "name": "phường Láng Thượng"
+            },
+            {
+                "name": "phường Nam Đồng"
+            },
+            {
+                "name": "phường Ngã Tư Sở"
+            },
+            {
+                "name": "phường Ô Chợ Dừa"
+            },
+            {
+                "name": "phường Phương Liên"
+            },
+            {
+                "name": "phường Phương Mai"
+            },
+            {
+                "name": "phường Quang Trung"
+            },
+            {
+                "name": "phường Quốc Tử Giám"
+            },
+            {
+                "name": "phường Thịnh Quang"
+            },
+            {
+                "name": "phường Thổ Quan"
+            },
+            {
+                "name": "phường Trung Liệt"
+            },
+            {
+                "name": "phường Trung Phụng"
+            },
+            {
+                "name": "phường Trung Tự"
+            },
+            {
+                "name": "phường Văn Chương"
+            },
+            {
+                "name": "phường Văn Miếu"
+            }]
+        },
+        {
+            "name": "Quận Hà Đông",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Biên Giang"
+            },
+            {
+                "name": "phường Đồng Mai"
+            },
+            {
+                "name": "phường Yên Nghĩa"
+            },
+            {
+                "name": "phường Dương Nội"
+            },
+            {
+                "name": "phường Hà Cầu"
+            },
+            {
+                "name": "phường La Khê"
+            },
+            {
+                "name": "phường Mộ Lao"
+            },
+            {
+                "name": "phường Nguyễn Trãi"
+            },
+            {
+                "name": "phường Phú La"
+            },
+            {
+                "name": "phường Phú Lãm"
+            },
+            {
+                "name": "phường Phú Lương"
+            },
+            {
+                "name": "phường Kiến Hưng"
+            },
+            {
+                "name": "phường Phúc La"
+            },
+            {
+                "name": "phường Quang Trung"
+            },
+            {
+                "name": "phường Vạn Phúc"
+            },
+            {
+                "name": "phường Văn Quán"
+            },
+            {
+                "name": "phường Yết Kiêu"
+            }]
+        },
+        {
+            "name": "Quận Hai Bà Trưng",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Bách Khoa"
+            },
+            {
+                "name": "phường Bạch Đằng"
+            },
+            {
+                "name": "phường Bạch Mai"
+            },
+            {
+                "name": "phường Cầu Dền"
+            },
+            {
+                "name": "phường Đống Mác"
+            },
+            {
+                "name": "phường Đồng Nhân"
+            },
+            {
+                "name": "phường Đồng Tâm"
+            },
+            {
+                "name": "phường Lê Đại Hành"
+            },
+            {
+                "name": "phường Minh Khai"
+            },
+            {
+                "name": "phường Nguyễn Du"
+            },
+            {
+                "name": "phường Phạm Đình Hổ"
+            },
+            {
+                "name": "phường Phố Huế"
+            },
+            {
+                "name": "phường Quỳnh Lôi"
+            },
+            {
+                "name": "phường Quỳnh Mai"
+            },
+            {
+                "name": "phường Thanh Lương"
+            },
+            {
+                "name": "phường Thanh Nhàn"
+            },
+            {
+                "name": "phường Trương Định"
+            },
+            {
+                "name": "phường Vĩnh Tuy"
+            }]
+        },
+        {
+            "name": "Quận Hoàn Kiếm",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Chương Dương"
+            },
+            {
+                "name": "phường Cửa Đông"
+            },
+            {
+                "name": "phường Cửa Nam"
+            },
+            {
+                "name": "phường Đồng Xuân"
+            },
+            {
+                "name": "phường Hàng Bạc"
+            },
+            {
+                "name": "phường Hàng Bài"
+            },
+            {
+                "name": "phường Hàng Bồ"
+            },
+            {
+                "name": "phường Hàng Bông"
+            },
+            {
+                "name": "phường Hàng Buồm"
+            },
+            {
+                "name": "phường Hàng Đào"
+            },
+            {
+                "name": "phường Hàng Gai"
+            },
+            {
+                "name": "phường Hàng Mã"
+            },
+            {
+                "name": "phường Hàng Trống"
+            },
+            {
+                "name": "phường Lý Thái Tổ"
+            },
+            {
+                "name": "phường Phan Chu Trinh"
+            },
+            {
+                "name": "phường Phúc Tân"
+            },
+            {
+                "name": "phường Trần Hưng Đạo"
+            },
+            {
+                "name": "phường Tràng Tiền"
+            }]
+        },
+        {
+            "name": "Quận Hoàng Mai",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Đại Kim"
+            },
+            {
+                "name": "phường Định Công"
+            },
+            {
+                "name": "phường Giáp Bát"
+            },
+            {
+                "name": "phường Hoàng Liệt"
+            },
+            {
+                "name": "phường Hoàng Văn Thụ"
+            },
+            {
+                "name": "phường Lĩnh Nam"
+            },
+            {
+                "name": "phường Mai Động"
+            },
+            {
+                "name": "phường Tân Mai"
+            },
+            {
+                "name": "phường Thanh Trì"
+            },
+            {
+                "name": "phường Thịnh Liệt"
+            },
+            {
+                "name": "phường Trần Phú"
+            },
+            {
+                "name": "phường Tương Mai"
+            },
+            {
+                "name": "phường Vĩnh Hưng"
+            },
+            {
+                "name": "phường Yên Sở"
+            }]
+        },
+        {
+            "name": "Quận Long Biên",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Bồ Đề"
+            },
+            {
+                "name": "phường Cự Khối"
+            },
+            {
+                "name": "phường Đức Giang"
+            },
+            {
+                "name": "phường Gia Thụy"
+            },
+            {
+                "name": "phường Giang Biên"
+            },
+            {
+                "name": "phường Long Biên"
+            },
+            {
+                "name": "phường Ngọc Lâm"
+            },
+            {
+                "name": "phường Ngọc Thụy"
+            },
+            {
+                "name": "phường Phúc Đồng"
+            },
+            {
+                "name": "phường Phúc Lợi"
+            },
+            {
+                "name": "phường Sài Đồng"
+            },
+            {
+                "name": "phường Thạch Bàn"
+            },
+            {
+                "name": "phường Thượng Thanh"
+            },
+            {
+                "name": "phường Việt Hưng"
+            }]
+        },
+        {
+            "name": "Quận Nam Từ Liêm",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Cầu Diễn"
+            },
+            {
+                "name": "phường Mỹ Đình 1"
+            },
+            {
+                "name": "phường Mỹ Đình 2"
+            },
+            {
+                "name": "phường Phú Đô"
+            },
+            {
+                "name": "phường Mễ Trì"
+            },
+            {
+                "name": "phường Trung Văn"
+            },
+            {
+                "name": "phường Đại Mỗ"
+            },
+            {
+                "name": "phường Tây Mỗ"
+            },
+            {
+                "name": "phường Phương Canh"
+            },
+            {
+                "name": "phường Xuân Phương"
+            }]
+        },
+        {
+            "name": "Quận Tây Hồ",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Bưởi"
+            },
+            {
+                "name": "phường Nhật Tân"
+            },
+            {
+                "name": "phường Phú Thượng"
+            },
+            {
+                "name": "phường Quảng An"
+            },
+            {
+                "name": "phường Thụy Khuê"
+            },
+            {
+                "name": "phường Tứ Liên"
+            },
+            {
+                "name": "phường Xuân La"
+            },
+            {
+                "name": "phường Yên Phụ"
+            }]
+        },
+        {
+            "name": "Quận Thanh Xuân",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Hạ Đình"
+            },
+            {
+                "name": "phường Khương Đình"
+            },
+            {
+                "name": "phường Khương Mai"
+            },
+            {
+                "name": "phường Khương Trung"
+            },
+            {
+                "name": "phường Kim Giang"
+            },
+            {
+                "name": "phường Nhân Chính"
+            },
+            {
+                "name": "phường Phương Liệt"
+            },
+            {
+                "name": "phường Thanh Xuân Bắc"
+            },
+            {
+                "name": "phường Thanh Xuân Nam"
+            },
+            {
+                "name": "phường Thanh Xuân Trung"
+            },
+            {
+                "name": "phường Thượng Đình"
+            }]
+        },
+        {
+            "name": "Thị xã Sơn Tây",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "phường Lê Lợi"
+            },
+            {
+                "name": "phường Ngô Quyền"
+            },
+            {
+                "name": "phường Phú Thịnh"
+            },
+            {
+                "name": "phường Quang Trung"
+            },
+            {
+                "name": "phường Sơn Lộc"
+            },
+            {
+                "name": "phường Trung Hưng"
+            },
+            {
+                "name": "phường Trung Sơn Trầm"
+            },
+            {
+                "name": "phường Viên Sơn"
+            },
+            {
+                "name": "phường Xuân Khanh"
+            },
+            {
+                "name": "xã Cổ Đông"
+            },
+            {
+                "name": "xã Đường Lâm"
+            },
+            {
+                "name": "xã Kim Sơn"
+            },
+            {
+                "name": "xã Sơn Đông"
+            },
+            {
+                "name": "xã Thanh Mỹ"
+            },
+            {
+                "name": "xã Xuân Sơn"
+            }]
+        },
+        {
+            "name": "Huyện Ba Vì",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Tây Đằng"
+            },
+            {
+                "name": "xã Ba Trại"
+            },
+            {
+                "name": "xã Ba Vì"
+            },
+            {
+                "name": "xã Cẩm Lĩnh"
+            },
+            {
+                "name": "xã Cam Thượng"
+            },
+            {
+                "name": "xã Châu Sơn"
+            },
+            {
+                "name": "xã Chu Minh"
+            },
+            {
+                "name": "xã Cổ Đô"
+            },
+            {
+                "name": "xã Đông Quang"
+            },
+            {
+                "name": "xã Đồng Thái"
+            },
+            {
+                "name": "xã Khánh Thượng"
+            },
+            {
+                "name": "xã Minh Châu"
+            },
+            {
+                "name": "xã Minh Quang"
+            },
+            {
+                "name": "xã Phong Vân"
+            },
+            {
+                "name": "xã Phú Châu"
+            },
+            {
+                "name": "xã Phú Cường"
+            },
+            {
+                "name": "xã Phú Đông"
+            },
+            {
+                "name": "xã Phú Phương"
+            },
+            {
+                "name": "xã Phú Sơn"
+            },
+            {
+                "name": "xã Sơn Đà"
+            },
+            {
+                "name": "xã Tản Hồng"
+            },
+            {
+                "name": "xã Tản Lĩnh"
+            },
+            {
+                "name": "xã Thái Hòa"
+            },
+            {
+                "name": "xã Thuần Mỹ"
+            },
+            {
+                "name": "xã Thụy An"
+            },
+            {
+                "name": "xã Tiên Phong"
+            },
+            {
+                "name": "xã Tòng Bạt"
+            },
+            {
+                "name": "xã Vân Hòa"
+            },
+            {
+                "name": "xã Vạn Thắng"
+            },
+            {
+                "name": "xã Vật Lại"
+            },
+            {
+                "name": "xã Yên Bài"
+            }]
+        },
+        {
+            "name": "Huyện Chương Mỹ",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Chúc Sơn"
+            },
+            {
+                "name": "thị trấn Xuân Mai"
+            },
+            {
+                "name": "xã Đại Yên"
+            },
+            {
+                "name": "xã Đông Phương Yên"
+            },
+            {
+                "name": "xã Đông Sơn"
+            },
+            {
+                "name": "xã Đồng Lạc"
+            },
+            {
+                "name": "xã Đồng Phú"
+            },
+            {
+                "name": "xã Hòa Chính"
+            },
+            {
+                "name": "xã Hoàng Diệu"
+            },
+            {
+                "name": "xã Hoàng Văn Thụ"
+            },
+            {
+                "name": "xã Hồng Phong"
+            },
+            {
+                "name": "xã Hợp Đồng"
+            },
+            {
+                "name": "xã Hữu Văn"
+            },
+            {
+                "name": "xã Lam Điền"
+            },
+            {
+                "name": "xã Mỹ Lương"
+            },
+            {
+                "name": "xã Nam Phương Tiến"
+            },
+            {
+                "name": "xã Ngọc Hòa"
+            },
+            {
+                "name": "xã Phú Nam An"
+            },
+            {
+                "name": "xã Phú Nghĩa"
+            },
+            {
+                "name": "xã Phụng Châu"
+            },
+            {
+                "name": "xã Quảng Bị"
+            },
+            {
+                "name": "xã Tân Tiến"
+            },
+            {
+                "name": "xã Tiên Phương"
+            },
+            {
+                "name": "xã Tốt Động"
+            },
+            {
+                "name": "xã Thanh Bình"
+            },
+            {
+                "name": "xã Thủy Xuân Tiên"
+            },
+            {
+                "name": "xã Thụy Hương"
+            },
+            {
+                "name": "xã Thượng Vực"
+            },
+            {
+                "name": "xã Trần Phú"
+            },
+            {
+                "name": "xã Trung Hòa"
+            },
+            {
+                "name": "xã Trường Yên"
+            },
+            {
+                "name": "xã Văn Võ"
+            }]
+        },
+        {
+            "name": "Huyện Đan Phượng",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Phùng"
+            },
+            {
+                "name": "xã Đan Phượng"
+            },
+            {
+                "name": "xã Đồng Tháp"
+            },
+            {
+                "name": "xã Hạ Mỗ"
+            },
+            {
+                "name": "xã Hồng Hà"
+            },
+            {
+                "name": "xã Liên Hà"
+            },
+            {
+                "name": "xã Liên Hồng"
+            },
+            {
+                "name": "xã Liên Trung"
+            },
+            {
+                "name": "xã Phương Đình"
+            },
+            {
+                "name": "xã Song Phượng"
+            },
+            {
+                "name": "xã Tân Hội"
+            },
+            {
+                "name": "xã Tân Lập"
+            },
+            {
+                "name": "xã Thọ An"
+            },
+            {
+                "name": "xã Thọ Xuân"
+            },
+            {
+                "name": "xã Thượng Mỗ"
+            },
+            {
+                "name": "xã Trung Châu"
+            }]
+        },
+        {
+            "name": "Huyện Đông Anh",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Đông Anh"
+            },
+            {
+                "name": "xã Bắc Hồng"
+            },
+            {
+                "name": "xã Cổ Loa"
+            },
+            {
+                "name": "xã Đại Mạch"
+            },
+            {
+                "name": "xã Đông Hội"
+            },
+            {
+                "name": "xã Dục Tú"
+            },
+            {
+                "name": "xã Hải Bối"
+            },
+            {
+                "name": "xã Kim Chung"
+            },
+            {
+                "name": "xã Kim Nỗ"
+            },
+            {
+                "name": "xã Liên Hà"
+            },
+            {
+                "name": "xã Mai Lâm"
+            },
+            {
+                "name": "xã Nam Hồng"
+            },
+            {
+                "name": "xã Nguyên Khê"
+            },
+            {
+                "name": "xã Tàm Xá"
+            },
+            {
+                "name": "xã Thụy Lâm"
+            },
+            {
+                "name": "xã Tiên Dương"
+            },
+            {
+                "name": "xã Uy Nỗ"
+            },
+            {
+                "name": "xã Vân Hà"
+            },
+            {
+                "name": "xã Vân Nội"
+            },
+            {
+                "name": "xã Việt Hùng"
+            },
+            {
+                "name": "xã Vĩnh Ngọc"
+            },
+            {
+                "name": "xã Võng La"
+            },
+            {
+                "name": "xã Xuân Canh"
+            },
+            {
+                "name": "xã Xuân Nộn"
+            }]
+        },
+        {
+            "name": "Huyện Gia Lâm",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Trâu Quỳ"
+            },
+            {
+                "name": "thị trấn Yên Viên"
+            },
+            {
+                "name": "xã Bát Tràng"
+            },
+            {
+                "name": "xã Cổ Bi"
+            },
+            {
+                "name": "xã Đa Tốn"
+            },
+            {
+                "name": "xã Đặng Xá"
+            },
+            {
+                "name": "xã Phú Thị"
+            },
+            {
+                "name": "xã Đông Dư"
+            },
+            {
+                "name": "xã Dương Hà"
+            },
+            {
+                "name": "xã Dương Quang"
+            },
+            {
+                "name": "xã Dương Xá"
+            },
+            {
+                "name": "xã Kiêu Kỵ"
+            },
+            {
+                "name": "xã Kim Lan"
+            },
+            {
+                "name": "xã Văn Đức"
+            },
+            {
+                "name": "xã Lệ Chi"
+            },
+            {
+                "name": "xã Ninh Hiệp"
+            },
+            {
+                "name": "xã Đình Xuyên"
+            },
+            {
+                "name": "xã Phù Đổng"
+            },
+            {
+                "name": "xã Trung Mầu"
+            },
+            {
+                "name": "xã Yên Thường"
+            },
+            {
+                "name": "xã Yên Viên"
+            },
+            {
+                "name": "xã Kim Sơn"
+            }]
+        },
+        {
+            "name": "Huyện Hoài Đức",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Trạm Trôi"
+            },
+            {
+                "name": "xã An Khánh"
+            },
+            {
+                "name": "xã An Thượng"
+            },
+            {
+                "name": "xã Cát Quế"
+            },
+            {
+                "name": "xã Đắc Sở"
+            },
+            {
+                "name": "xã Di Trạch"
+            },
+            {
+                "name": "xã Đông La"
+            },
+            {
+                "name": "xã Đức Giang"
+            },
+            {
+                "name": "xã Đức Thượng"
+            },
+            {
+                "name": "xã Dương Liễu"
+            },
+            {
+                "name": "xã Kim Chung"
+            },
+            {
+                "name": "xã La Phù"
+            },
+            {
+                "name": "xã Lại Yên"
+            },
+            {
+                "name": "xã Minh Khai"
+            },
+            {
+                "name": "xã Sơn Đồng"
+            },
+            {
+                "name": "xã Song Phương"
+            },
+            {
+                "name": "xã Tiền Yên"
+            },
+            {
+                "name": "xã Vân Canh"
+            },
+            {
+                "name": "xã Vân Côn"
+            },
+            {
+                "name": "xã Yên Sở"
+            }]
+        },
+        {
+            "name": "Huyện Mê Linh",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Chi Đông"
+            },
+            {
+                "name": "thị trấn Quang Minh"
+            },
+            {
+                "name": "xã Chu Phan"
+            },
+            {
+                "name": "xã Đại Thịnh"
+            },
+            {
+                "name": "xã Hoàng Kim"
+            },
+            {
+                "name": "xã Kim Hoa"
+            },
+            {
+                "name": "xã Liên Mạc"
+            },
+            {
+                "name": "xã Mê Linh"
+            },
+            {
+                "name": "xã Tam Đồng"
+            },
+            {
+                "name": "xã Thạch Đà"
+            },
+            {
+                "name": "xã Thanh Lâm"
+            },
+            {
+                "name": "xã Tiền Phong"
+            },
+            {
+                "name": "xã Tiến Thắng"
+            },
+            {
+                "name": "xã Tiến Thịnh"
+            },
+            {
+                "name": "xã Tráng Việt"
+            },
+            {
+                "name": "xã Tự Lập"
+            },
+            {
+                "name": "xã Vạn Yên"
+            },
+            {
+                "name": "xã Văn Khê"
+            }]
+        },
+        {
+            "name": "Huyện Mỹ Đức",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Đại Nghĩa"
+            },
+            {
+                "name": "xã An Mỹ"
+            },
+            {
+                "name": "xã An Phú"
+            },
+            {
+                "name": "xã An Tiến"
+            },
+            {
+                "name": "xã Bột Xuyên"
+            },
+            {
+                "name": "xã Đại Hưng"
+            },
+            {
+                "name": "xã Đốc Tín"
+            },
+            {
+                "name": "xã Đồng Tâm"
+            },
+            {
+                "name": "xã Hồng Sơn"
+            },
+            {
+                "name": "xã Hợp Thanh"
+            },
+            {
+                "name": "xã Hợp Tiến"
+            },
+            {
+                "name": "xã Hùng Tiến"
+            },
+            {
+                "name": "xã Hương Sơn"
+            },
+            {
+                "name": "xã Lê Thanh"
+            },
+            {
+                "name": "xã Mỹ Thành"
+            },
+            {
+                "name": "xã Phù Lưu Tế"
+            },
+            {
+                "name": "xã Phúc Lâm"
+            },
+            {
+                "name": "xã Phùng Xá"
+            },
+            {
+                "name": "xã Thượng Lâm"
+            },
+            {
+                "name": "xã Tuy Lai"
+            },
+            {
+                "name": "xã Vạn Kim"
+            },
+            {
+                "name": "xã Xuy Xá"
+            }]
+        },
+        {
+            "name": "Huyện Phú Xuyên",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Phú Xuyên"
+            },
+            {
+                "name": "thị trấnPhú Minh"
+            },
+            {
+                "name": "xã Bạch Hạ"
+            },
+            {
+                "name": "xã Châu Can"
+            },
+            {
+                "name": "xã Chuyên Mỹ"
+            },
+            {
+                "name": "xã Đại Thắng"
+            },
+            {
+                "name": "xã Đại Xuyên"
+            },
+            {
+                "name": "xã Hoàng Long"
+            },
+            {
+                "name": "xã Hồng Minh"
+            },
+            {
+                "name": "xã Hồng Thái"
+            },
+            {
+                "name": "xã Khai Thái"
+            },
+            {
+                "name": "xã Minh Tân"
+            },
+            {
+                "name": "xã Nam Phong"
+            },
+            {
+                "name": "xã Nam Tiến"
+            },
+            {
+                "name": "xã Nam Triều"
+            },
+            {
+                "name": "xã Phú Túc"
+            },
+            {
+                "name": "xã Phú Yên"
+            },
+            {
+                "name": "xã Phúc Tiến"
+            },
+            {
+                "name": "xã Phượng Dực"
+            },
+            {
+                "name": "xã Quang Lãng"
+            },
+            {
+                "name": "xã Quang Trung"
+            },
+            {
+                "name": "xã Sơn Hà"
+            },
+            {
+                "name": "xã Tân Dân"
+            },
+            {
+                "name": "xã Tri Thủy"
+            },
+            {
+                "name": "xã Tri Trung"
+            },
+            {
+                "name": "xã Văn Hoàng"
+            },
+            {
+                "name": "xã Vân Từ"
+            }]
+        },
+        {
+            "name": "Huyện Phúc Thọ",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Phúc Thọ"
+            },
+            {
+                "name": "xã Hát Môn"
+            },
+            {
+                "name": "xã Hiệp Thuận"
+            },
+            {
+                "name": "xã Liên Hiệp"
+            },
+            {
+                "name": "xã Long Xuyên"
+            },
+            {
+                "name": "xã Ngọc Tảo"
+            },
+            {
+                "name": "xã Phúc Hòa"
+            },
+            {
+                "name": "xã Phụng Thượng"
+            },
+            {
+                "name": "xã Sen Phương"
+            },
+            {
+                "name": "xã Tam Hiệp"
+            },
+            {
+                "name": "xã Tam Thuấn"
+            },
+            {
+                "name": "xã Thanh Đa"
+            },
+            {
+                "name": "xã Thọ Lộc"
+            },
+            {
+                "name": "xã Thượng Cốc"
+            },
+            {
+                "name": "xã Tích Giang"
+            },
+            {
+                "name": "xã Trạch Mỹ Lộc"
+            },
+            {
+                "name": "xã Vân Hà"
+            },
+            {
+                "name": "xã Vân Nam"
+            },
+            {
+                "name": "xã Vân Phúc"
+            },
+            {
+                "name": "xã Võng Xuyên"
+            },
+            {
+                "name": "xã Xuân Đình"
+            }]
+        },
+        {
+            "name": "Huyện Quốc Oai",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Quốc Oai"
+            },
+            {
+                "name": "xã Cấn Hữu"
+            },
+            {
+                "name": "xã Cộng Hòa"
+            },
+            {
+                "name": "xã Đại Thành"
+            },
+            {
+                "name": "xã Đồng Quang"
+            },
+            {
+                "name": "xã Đông Yên"
+            },
+            {
+                "name": "xã Hòa Thạch"
+            },
+            {
+                "name": "xã Liệp Tuyết"
+            },
+            {
+                "name": "xã Nghĩa Hương"
+            },
+            {
+                "name": "xã Ngọc Liệp"
+            },
+            {
+                "name": "xã Ngọc Mỹ"
+            },
+            {
+                "name": "xã Phú Cát"
+            },
+            {
+                "name": "xã Phú Mãn"
+            },
+            {
+                "name": "xã Phượng Cách"
+            },
+            {
+                "name": "xã Sài Sơn"
+            },
+            {
+                "name": "xã Tân Hòa"
+            },
+            {
+                "name": "xã Tân Phú"
+            },
+            {
+                "name": "xã Thạch Thán"
+            },
+            {
+                "name": "xã Tuyết Nghĩa"
+            },
+            {
+                "name": "xã Yên Sơn"
+            },
+            {
+                "name": "xã Đông Xuân"
+            }]
+        },
+        {
+            "name": "Huyện Sóc Sơn",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Sóc Sơn"
+            },
+            {
+                "name": "xã Bắc Phú"
+            },
+            {
+                "name": "xã Bắc Sơn"
+            },
+            {
+                "name": "xã Đông Xuân"
+            },
+            {
+                "name": "xã Đức Hòa"
+            },
+            {
+                "name": "xã Hiền Ninh"
+            },
+            {
+                "name": "xã Hồng Kỳ"
+            },
+            {
+                "name": "xã Kim Lũ"
+            },
+            {
+                "name": "xã Mai Đình"
+            },
+            {
+                "name": "xã Minh Phú"
+            },
+            {
+                "name": "xã Minh Trí"
+            },
+            {
+                "name": "xã Nam Sơn"
+            },
+            {
+                "name": "xã Phú Cường"
+            },
+            {
+                "name": "xã Phù Linh"
+            },
+            {
+                "name": "xã Phù Lỗ"
+            },
+            {
+                "name": "xã Phú Minh"
+            },
+            {
+                "name": "xã Quang Tiến"
+            },
+            {
+                "name": "xã Tân Dân"
+            },
+            {
+                "name": "xã Tân Hưng"
+            },
+            {
+                "name": "xã Tân Minh"
+            },
+            {
+                "name": "xã Thanh Xuân"
+            },
+            {
+                "name": "xã Tiên Dược"
+            },
+            {
+                "name": "xã Trung Giã"
+            },
+            {
+                "name": "xã Việt Long"
+            },
+            {
+                "name": "xã Xuân Giang"
+            },
+            {
+                "name": "xã Xuân Thu"
+            }]
+        },
+        {
+            "name": "Huyện Thạch Thất",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Liên Quan"
+            },
+            {
+                "name": "xã Bình Phú"
+            },
+            {
+                "name": "xã Bình Yên"
+            },
+            {
+                "name": "xã Cẩm Yên"
+            },
+            {
+                "name": "xã Cần Kiệm"
+            },
+            {
+                "name": "xã Canh Nậu"
+            },
+            {
+                "name": "xã Chàng Sơn"
+            },
+            {
+                "name": "xã Đại Đồng"
+            },
+            {
+                "name": "xã Dị Nậu"
+            },
+            {
+                "name": "xã Đồng Trúc"
+            },
+            {
+                "name": "xã Hạ Bằng"
+            },
+            {
+                "name": "xã Hương Ngải"
+            },
+            {
+                "name": "xã Hữu Bằng"
+            },
+            {
+                "name": "xã Kim Quan"
+            },
+            {
+                "name": "xã Lại Thượng"
+            },
+            {
+                "name": "xã Phú Kim"
+            },
+            {
+                "name": "xã Phùng Xá"
+            },
+            {
+                "name": "xã Tân Xã"
+            },
+            {
+                "name": "xã Thạch Hòa"
+            },
+            {
+                "name": "xã Thạch Xá"
+            },
+            {
+                "name": "xã Tiến Xuân"
+            },
+            {
+                "name": "xã Yên Bình"
+            },
+            {
+                "name": "xã Yên Trung"
+            }]
+        },
+        {
+            "name": "Huyện Thanh Oai",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Kim Bài"
+            },
+            {
+                "name": "xã Bích Hòa"
+            },
+            {
+                "name": "xã Bình Minh"
+            },
+            {
+                "name": "xã Cao Dương"
+            },
+            {
+                "name": "xã Cao Viên"
+            },
+            {
+                "name": "xã Cự Khê"
+            },
+            {
+                "name": "xã Dân Hòa"
+            },
+            {
+                "name": "xã Đỗ Động"
+            },
+            {
+                "name": "xã Hồng Dương"
+            },
+            {
+                "name": "xã Kim An"
+            },
+            {
+                "name": "xã Kim Thư"
+            },
+            {
+                "name": "xã Liên Châu"
+            },
+            {
+                "name": "xã Mỹ Hưng"
+            },
+            {
+                "name": "xã Phương Trung"
+            },
+            {
+                "name": "xã Tam Hưng"
+            },
+            {
+                "name": "xã Tân Ước"
+            },
+            {
+                "name": "xã Thanh Cao"
+            },
+            {
+                "name": "xã Thanh Mai"
+            },
+            {
+                "name": "xã Thanh Thùy"
+            },
+            {
+                "name": "xã Thanh Văn"
+            },
+            {
+                "name": "xã Xuân Dương"
+            }]
+        },
+        {
+            "name": "Huyện Thanh Trì",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Văn Điển"
+            },
+            {
+                "name": "xã Đại Áng"
+            },
+            {
+                "name": "xã Đông Mỹ"
+            },
+            {
+                "name": "xã Duyên Hà"
+            },
+            {
+                "name": "xã Hữu Hòa"
+            },
+            {
+                "name": "xã Liên Ninh"
+            },
+            {
+                "name": "xã Ngọc Hồi"
+            },
+            {
+                "name": "xã Ngũ Hiệp"
+            },
+            {
+                "name": "xã Tả Thanh Oai"
+            },
+            {
+                "name": "xã Tam Hiệp"
+            },
+            {
+                "name": "xã Tân Triều"
+            },
+            {
+                "name": "xã Thanh Liệt"
+            },
+            {
+                "name": "xã Tứ Hiệp"
+            },
+            {
+                "name": "xã Vạn Phúc"
+            },
+            {
+                "name": "xã Vĩnh Quỳnh"
+            },
+            {
+                "name": "xã Yên Mỹ"
+            }]
+        },
+        {
+            "name": "Huyện Thường Tín",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Thường Tín"
+            },
+            {
+                "name": "xã Ninh Sở"
+            },
+            {
+                "name": "xã Nhị Khê"
+            },
+            {
+                "name": "xã Duyên Thái"
+            },
+            {
+                "name": "xã Khánh Hà"
+            },
+            {
+                "name": "xã Hòa Bình"
+            },
+            {
+                "name": "xã Văn Bình"
+            },
+            {
+                "name": "xã Hiền Giang"
+            },
+            {
+                "name": "xã Hồng Vân"
+            },
+            {
+                "name": "xã Vân Tảo"
+            },
+            {
+                "name": "xã Liên Phương"
+            },
+            {
+                "name": "xã Văn Phú"
+            },
+            {
+                "name": "xã Tự Nhiên"
+            },
+            {
+                "name": "xã Tiền Phong"
+            },
+            {
+                "name": "xã Hà Hồi"
+            },
+            {
+                "name": "xã Thư Phú"
+            },
+            {
+                "name": "xã Nguyễn Trãi"
+            },
+            {
+                "name": "xã Quất Động"
+            },
+            {
+                "name": "xã Chương Dương"
+            },
+            {
+                "name": "xã Tân Minh"
+            },
+            {
+                "name": "xã Lê Lợi"
+            },
+            {
+                "name": "xã Thắng Lợi"
+            },
+            {
+                "name": "xã Dũng Tiến"
+            },
+            {
+                "name": "xã Thống Nhất"
+            },
+            {
+                "name": "xã Nghiêm Xuyên"
+            },
+            {
+                "name": "xã Tô Hiệu"
+            },
+            {
+                "name": "xã Văn Tự"
+            },
+            {
+                "name": "xã Vạn Điểm"
+            },
+            {
+                "name": "xã Minh Cường"
+            }]
+        },
+        {
+            "name": "Huyện Ứng Hòa",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "thị trấn Vân Đình"
+            },
+            {
+                "name": "xã Cao Thành"
+            },
+            {
+                "name": "xã Đại Cường"
+            },
+            {
+                "name": "xã Đại Hùng"
+            },
+            {
+                "name": "xã Đội Bình"
+            },
+            {
+                "name": "xã Đông Lỗ"
+            },
+            {
+                "name": "xã Đồng Tiến"
+            },
+            {
+                "name": "xã Đồng Tân"
+            },
+            {
+                "name": "xã Hoa Sơn"
+            },
+            {
+                "name": "xã Hòa Lâm"
+            },
+            {
+                "name": "xã Hòa Nam"
+            },
+            {
+                "name": "xã Hòa Phú"
+            },
+            {
+                "name": "xã Hòa Xá"
+            },
+            {
+                "name": "xã Hồng Quang"
+            },
+            {
+                "name": "xã Kim Đường"
+            },
+            {
+                "name": "xã Liên Bạt"
+            },
+            {
+                "name": "xã Lưu Hoàng"
+            },
+            {
+                "name": "xã Minh Đức"
+            },
+            {
+                "name": "xã Phù Lưu"
+            },
+            {
+                "name": "xã Phương Tú"
+            },
+            {
+                "name": "xã Quảng Phú Cầu"
+            },
+            {
+                "name": "xã Sơn Công"
+            },
+            {
+                "name": "xã Tảo Dương Văn"
+            },
+            {
+                "name": "xã Trầm Lộng"
+            },
+            {
+                "name": "xã Trung Tú"
+            },
+            {
+                "name": "xã Trường Thịnh"
+            },
+            {
+                "name": "xã Vạn Thái"
+            },
+            {
+                "name": "xã Viên An"
+            },
+            {
+                "name": "xã Viên Nội"
+            }]
+        }]
+    },
+    {
+        "name": "Hồ Chí Minh",
+        "flag": [
+            "South"
+        ],
+        "data": [
+        {
+            "name": "Quận 1",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Bến Nghé",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Bến Thành",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Cô Giang",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Cầu Kho",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Cầu Ông Lãnh",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Đa Kao",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Nguyễn Cư Trinh",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Nguyễn Thái Bình",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phạm Ngũ Lão",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Tân Định",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            }]
+        },
+        {
+            "name": "Quận 3",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 2",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 3",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 4",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 5",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 9",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 10",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 11",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 12",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 13",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường 14",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Võ Thị Sáu",
+                "flag": [
+
+                ],
+                "data": [
+
+                ]
+            }]
+        },
+        {
+            "name": "Quận 4",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 16"
+            },
+            {
+                "name": "Phường 18"
+            }]
+        },
+        {
+            "name": "Quận 5",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            }]
+        },
+        {
+            "name": "Quận 6",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            }]
+        },
+        {
+            "name": "Quận 7",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường Bình Thuận"
+            },
+            {
+                "name": "Phường Phú Mỹ"
+            },
+            {
+                "name": "Phường Phú Thuận"
+            },
+            {
+                "name": "Phường Tân Hưng"
+            },
+            {
+                "name": "Phường Tân Kiểng"
+            },
+            {
+                "name": "Phường Tân Phong"
+            },
+            {
+                "name": "Phường Tân Phú"
+            },
+            {
+                "name": "Phường Tân Quy"
+            },
+            {
+                "name": "Phường Tân Thuận Đông"
+            },
+            {
+                "name": "Phường Tân Thuận Tây"
+            }]
+        },
+        {
+            "name": "Quận 8",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 16"
+            }]
+        },
+        {
+            "name": "Quận 10",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 16"
+            }]
+        },
+        {
+            "name": "Quận 11",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 16"
+            }]
+        },
+        {
+            "name": "Quận 12",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường An Phú Đông"
+            },
+            {
+                "name": "Phường Đông Hưng Thuận"
+            },
+            {
+                "name": "Phường Hiệp Thành"
+            },
+            {
+                "name": "Phường Tân Chánh Hiệp"
+            },
+            {
+                "name": "Phường Tân Hưng Thuận"
+            },
+            {
+                "name": "Phường Tân Thới Hiệp"
+            },
+            {
+                "name": "Phường Tân Thới Nhất"
+            },
+            {
+                "name": "Phường Thạnh Lộc"
+            },
+            {
+                "name": "Phường Thạnh Xuân"
+            },
+            {
+                "name": "Phường Thới An"
+            },
+            {
+                "name": "Phường Trung Mỹ Tây"
+            }]
+        },
+        {
+            "name": "Quận Thủ Đức",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường An Khánh",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường An Lợi Đông",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường An Phú",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Bình Chiểu",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Bình Thọ",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Bình Trưng Đông",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Bình Trưng Tây",
+                "data": [
+
+                ]
+            },
+            {
+                "Phường name": "Cát Lái",
+                "data": [
+
+                ]
+            },
+            {
+                "Phường name": "Hiệp Bình Chánh",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Hiệp Bình Phước",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Hiệp Phú",
+                "data": [
+
+                ]
+            },
+            {
+                "Phường name": "Linh Chiểu",
+                "data": [
+
+                ]
+            },
+            {
+                "Phường name": "Linh Đông",
+                "data": [
+
+                ]
+            },
+            {
+                "Phường name": "Linh Tây",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Linh Trung",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Linh Xuân",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Long Bình",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Long Phước",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Long Thạnh Mỹ",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Long Trường",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Phú Hữu",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Phước Bình",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Phước Long A",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Phước Long B",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Tam Bình",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Tam Phú",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Tân Phú",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Tăng Nhơn Phú A",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Tăng Nhơn Phú B",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Thạnh Mỹ Lợi",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Thảo Điền",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Thủ Thiêm",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Trường Thạnh",
+                "data": [
+
+                ]
+            },
+            {
+                "name": "Phường Trường Thọ",
+                "data": [
+
+                ]
+            }]
+        },
+        {
+            "name": "Quận Bình Tân",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường An Lạc"
+            },
+            {
+                "name": "Phường An Lạc A"
+            },
+            {
+                "name": "Phường Bình Hưng Hòa"
+            },
+            {
+                "name": "Phường Bình Hưng Hòa A"
+            },
+            {
+                "name": "Phường Bình Hưng Hòa B"
+            },
+            {
+                "name": "Phường Bình Trị Đông"
+            },
+            {
+                "name": "Phường Bình Trị Đông A"
+            },
+            {
+                "name": "Phường Bình Trị Đông B"
+            },
+            {
+                "name": "Phường Tân Tạo"
+            },
+            {
+                "name": "Phường Tân Tạo A"
+            }]
+        },
+        {
+            "name": "Quận BÌnh Thạnh",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 17"
+            },
+            {
+                "name": "Phường 19"
+            },
+            {
+                "name": "Phường 21"
+            },
+            {
+                "name": "Phường 22"
+            },
+            {
+                "name": "Phường 24"
+            },
+            {
+                "name": "Phường 25"
+            },
+            {
+                "name": "Phường 26"
+            },
+            {
+                "name": "Phường 27"
+            },
+            {
+                "name": "Phường 28"
+            }]
+        },
+        {
+            "name": "Quận Gò Vấp",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 16"
+            },
+            {
+                "name": "Phường 17"
+            }]
+        },
+        {
+            "name": "Quận Phú Nhuận",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 15"
+            },
+            {
+                "name": "Phường 17"
+            }]
+        },
+        {
+            "name": "Quận Tân Bình",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường 1"
+            },
+            {
+                "name": "Phường 2"
+            },
+            {
+                "name": "Phường 3"
+            },
+            {
+                "name": "Phường 4"
+            },
+            {
+                "name": "Phường 5"
+            },
+            {
+                "name": "Phường 6"
+            },
+            {
+                "name": "Phường 7"
+            },
+            {
+                "name": "Phường 8"
+            },
+            {
+                "name": "Phường 9"
+            },
+            {
+                "name": "Phường 10"
+            },
+            {
+                "name": "Phường 11"
+            },
+            {
+                "name": "Phường 12"
+            },
+            {
+                "name": "Phường 13"
+            },
+            {
+                "name": "Phường 14"
+            },
+            {
+                "name": "Phường 15"
+            }]
+        },
+        {
+            "name": "Quận Tân Phú",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Phường Hiệp Tân"
+            },
+            {
+                "name": "Phường Hòa Thạnh"
+            },
+            {
+                "name": "Phường Phú Thạnh"
+            },
+            {
+                "name": "Phường Phú Thọ Hòa"
+            },
+            {
+                "name": "Phường Phú Trung"
+            },
+            {
+                "name": "Phường Sơn Kỳ"
+            },
+            {
+                "name": "Phường Tân Quý"
+            },
+            {
+                "name": "Phường Tân Sơn Nhì"
+            },
+            {
+                "name": "Phường Tân Thành"
+            },
+            {
+                "name": "Phường Tân Thới Hòa"
+            },
+            {
+                "name": "Phường Tây Thạnh"
+            }]
+        },
+        {
+            "name": "Huyện Bình Chánh",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Xã An Phú Tây"
+            },
+            {
+                "name": "Xã Bình Chánh"
+            },
+            {
+                "name": "Xã Bình Hưng"
+            },
+            {
+                "name": "Xã Bình Lợi"
+            },
+            {
+                "name": "Xã Đa Phước"
+            },
+            {
+                "name": "Xã Hưng Long"
+            },
+            {
+                "name": "Xã Lê Minh Xuân"
+            },
+            {
+                "name": "Xã Phạm Văn Hai"
+            },
+            {
+                "name": "Xã Phong Phú"
+            },
+            {
+                "name": "Xã Quy Đức"
+            },
+            {
+                "name": "Xã Tân Kiên"
+            },
+            {
+                "name": "Xã Tân Nhựt"
+            },
+            {
+                "name": "Xã Tân Quý Tây"
+            },
+            {
+                "name": "Xã Vĩnh Lộc A"
+            },
+            {
+                "name": "Xã Vĩnh Lộc B"
+            }]
+        },
+        {
+            "name": "Huyện Cần Giờ",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Thị Trấn Cần Thạnh"
+            },
+            {
+                "name": "Xã An Thới Đông"
+            },
+            {
+                "name": "Xã Bình Khánh"
+            },
+            {
+                "name": "Xã Long Hòa"
+            },
+            {
+                "name": "Xã Lý Nhơn"
+            },
+            {
+                "name": "Xã Tam Thôn Hiệp"
+            },
+            {
+                "name": "Xã Thạnh An"
+            }]
+        },
+        {
+            "name": "Quận Củ Chi",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Thị Trấn Củ Chi"
+            },
+            {
+                "name": "Xã An Nhơn Tây"
+            },
+            {
+                "name": "Xã An Phú"
+            },
+            {
+                "name": "Xã Bình Mỹ"
+            },
+            {
+                "name": "Xã Hòa Phú"
+            },
+            {
+                "name": "Xã Nhuận Đức"
+            },
+            {
+                "name": "Xã Phạm Văn Cội"
+            },
+            {
+                "name": "Xã Phú Hòa Đông"
+            },
+            {
+                "name": "Xã Phú Mỹ Hưng"
+            },
+            {
+                "name": "Xã Phước Hiệp"
+            },
+            {
+                "name": "Xã Phước Thạnh"
+            },
+            {
+                "name": "Xã Phước Vĩnh An"
+            },
+            {
+                "name": "Xã Tân An Hội"
+            },
+            {
+                "name": "Xã Tân Phú Trung"
+            },
+            {
+                "name": "Xã Tân Thạnh Đông"
+            },
+            {
+                "name": "Xã Tân Thạnh Tây"
+            },
+            {
+                "name": "Xã Tân Thông Hội"
+            },
+            {
+                "name": "Xã Thái Mỹ"
+            },
+            {
+                "name": "Xã Trung An"
+            },
+            {
+                "name": "Xã Trung Lập Hạ"
+            },
+            {
+                "name": "Xã Trung Lập Thượng"
+            }]
+        },
+        {
+            "name": "Quận Hóc Môn",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Thị Trấn Hóc Môn"
+            },
+            {
+                "name": "Xã Bà Điểm"
+            },
+            {
+                "name": "Xã Đông Thạnh"
+            },
+            {
+                "name": "Xã Nhị Bình"
+            },
+            {
+                "name": "Xã Tân Hiệp"
+            },
+            {
+                "name": "Xã Tân Thới Nhì"
+            },
+            {
+                "name": "Xã Tân Xuân"
+            },
+            {
+                "name": "Xã Thới Tam Thôn"
+            },
+            {
+                "name": "Xã Trung Chánh"
+            },
+            {
+                "name": "Xã Xuân Thới Đông"
+            },
+            {
+                "name": "Xã Xuân Thới Sơn"
+            },
+            {
+                "name": "Xã Xuân Thới Thượng"
+            }]
+        },
+        {
+            "name": "Huyện Nhà Bè",
+            "flag": [
+
+            ],
+            "data": [
+            {
+                "name": "Thị Trấn Nhà Bè"
+            },
+            {
+                "name": "Xã Hiệp Phước"
+            },
+            {
+                "name": "Xã Long Thới"
+            },
+            {
+                "name": "Xã Nhơn Đức"
+            },
+            {
+                "name": "Xã Phú Xuân"
+            },
+            {
+                "name": "Xã Phước Kiển"
+            },
+            {
+                "name": "Xã Phước Lộc"
+            }]
+        }]
+    },
+    {
+        "name": "Hải Phòng",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Đà Nẵng",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Cần Thơ",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Lai Châu",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Điện Biên",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Lào Cai",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hà Giang",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Cao Bằng",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Lạng Sơn",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Yên Bái",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Tuyên Quang",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bắc Kạn",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Sơn La",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Phú Thọ",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Vĩnh Phúc",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bắc Ninh",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bắc Giang",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Quảng Ninh",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hòa Bình",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hưng Yên",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hải Dương",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hà Nam",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Nam Định",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Ninh Bình",
+        "flag": [
+            "North"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Thanh Hóa",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Nghệ An",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hà Tĩnh",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Quảng Bình",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Quảng Trị",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Thừa Thiên-Huế",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Quảng Ngãi",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Kon Tum",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Gia Lai",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bình Định",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Phú Yên",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Đắk Lắk",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Đắk Nông",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Khánh Hòa",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Lâm Đồng",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bình Thuận",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bình Phước",
+        "flag": [
+            "Middle"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Tây Ninh",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bình Dương",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Đồng Nai",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bà Rịa-Vũng Tàu",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Long An",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Đồng Tháp",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Tiền Giang",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "An Giang",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Vĩnh Long",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Kiên Giang",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Hậu Giang",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Trà Vinh",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Sóc Trăng",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Bạc Liêu",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    },
+    {
+        "name": "Cà Mau",
+        "flag": [
+            "South"
+        ],
+        "data": [
+
+        ]
+    }]
+}
