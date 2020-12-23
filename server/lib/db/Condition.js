@@ -34,7 +34,8 @@ Condition.prototype.toString = function() {
 
 Condition.prototype.build = function() {
     var queryStr = " " + (this.operand && this.operand.length ? (this.alias + "." + this.operand) : "")
-                 + " " + this.operator + " " + this.target;
+                 + " " + this.operator + " "
+                 + (this.target != undefined ? this.target : "");
     for (var i in this.queue) {
         var opt = this.queue[i];
         queryStr += " " + opt.operator
