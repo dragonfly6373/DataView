@@ -18,12 +18,16 @@ webapp.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '/web/index.html'));
 });
 
-serviceBuilder.load(webapp, express.Router, controllers);
+// serviceBuilder.load(webapp, express.Router, controllers);
 
-// controllers.map(controller => {
-//     var router = express.Router();
-//     webapp.use("/" + controller.name, router);
-// });
+controllers.map(c => {
+    var router = express.Router();
+    webapp.use("/" + c.name, router);
+    return {api_name: c.name, router: router, controllers: c.controllers};
+}).forEach(c => {
+    serviceBuilder.register(c.api_name, c.router, c.controllers);
+});
+
 /* - Start APIs declaration - */
 // var userApi = express.Router();
 // webapp.use('/userService', userApi);

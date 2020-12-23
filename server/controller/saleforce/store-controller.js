@@ -60,15 +60,8 @@ var getAccountById = {
 var updateAccount = {
     name: "updateAccount", method: "GET",
     implementation: function(req, acc, callback) {
-        DB.beginTransaction((pool) => {
-            pool.getById(Account, acc.id, (data) => {
-                data = {...data, ...acc};
-                data.updatedDate = new Date();
-                pool.update(Account, data, () => {
-                    if (callback) callback();
-                    pool.close();
-                });
-            });
+        DB.update(Account, acc, (result) => {
+            if (callback) callback(result);
         });
     }
 };

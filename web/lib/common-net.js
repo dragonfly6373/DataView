@@ -26,8 +26,10 @@ var CommonNet = (function () {
                 if (useQueryString) {
                     var body = "";
                     for (var name in params) {
+                        var p = params[name];
+                        p = (p instanceof Object ? JSON.stringify(p) : p);
                         if (body && body.length) body += "&";
-                        body += name + "=" + encodeURIComponent("" + params[name]);
+                        body += name + "=" + encodeURIComponent("" + p);
                     }
                     url += url.indexOf("?") < 0 ? "?" : "&";
                     url += body;
@@ -43,6 +45,7 @@ var CommonNet = (function () {
             if (mime) request.overrideMimeType(mime);
             // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             // console.log("## send request: ", method, url, data);
+            console.log("send:", data);
             request.send(data);
             if (listener) listener.busy();
         };

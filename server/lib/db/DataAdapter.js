@@ -1,7 +1,8 @@
 /**
  * Document URL: https://github.com/mapbox/node-sqlite3/wiki/API
  */
-var sqlite3 = require('sqlite3');
+const sqlite3 = require("sqlite3");
+const Condition = require("./Condition");
 
 var DataAdapter = (function() {
     var DB_NAME = "./data.db";
@@ -36,7 +37,6 @@ var DataAdapter = (function() {
         return a
     }
     function getDataTypeName(code) {
-        console.log("getDataTypeName:", code);
         var type = DataType[code.toUpperCase()];
         if (!type) return DataType.INT.sql_type;
         return type.sql_type;
@@ -97,16 +97,19 @@ var DataAdapter = (function() {
         return Object.keys(clazz.datafields).reduce(function(a, c) {
             var f = clazz.datafields[c];
             var k = f.alias || f.mapping || c;
-            a[c] = f.ignore ? "" : convertDataType(data[k], f.datatype);
+            a[c] = f.visible == false ? "" : convertDataType(data[k], f.datatype);
             return a;
         }, {});
     }
     function mappingModel2Db(data, clazz) {
         return Object.keys(data).reduce(function(a, k) {
-            var f = clazz.datafields;
-            if (f) {
-                if (f.mapping) a[f.mapping] = data[k];
-                else a[k] = data[k];
+            var f = clazz.datafields[k];
+            if (f && !f.dbignore) {
+                if (f.mapping) {
+                    a[f.mapping] = data[k];
+                } else {
+                    a[k] = data[k];
+                }
             }
             return a;
         }, {});
@@ -142,8 +145,6 @@ var DataAdapter = (function() {
             this.db.exec("BEGIN", function(error) {
                 if (!thiz._isError(error) && callback) callback(thiz);
             });
-            // db.exec("ROLLBACK");
-            // db.exec("COMMIT");
         } catch(error) {
             this.close();
         }
@@ -194,7 +195,6 @@ var DataAdapter = (function() {
                 return s;
             });
         var constraints = getConstraints(clazz);
-        console.log("# Constraints:", constraints);
         var sql = "CREATE TABLE IF NOT EXISTS "
                 + clazz.tablename + "(" + columns.join(", ")
                 + (constraints && constraints.length ? ", " + constraints.join(", ") : "")
@@ -240,18 +240,18 @@ var DataAdapter = (function() {
     DB.prototype.insertMulti = function(clazz, list, callback) {
         console.log("Insert Multi:", clazz.tablename, data);
     };
-    DB.prototype.update = function(clazz, data, conditions, callback) {
-        console.log("Update:", clazz.tablename, data);
+    DB.prototype.batchUpdate = function(clazz, data, conditions, callback) {
         data = mappingModel2Db(data, clazz);
         var thiz = this;
         if (!this.db) this.db = getConnection();
         var setStr = Object.keys(data).map((key) => {
-            console.log(" . ", key);
             return (key + " = ?");
         }).join(", ");
-        var sql = "UPDATE " + clazz.tablename + " AS _root" + " SET " + setStr + " " + (conditions ? conditions.toString() : "");
+        var sql = "UPDATE " + clazz.tablename + " AS _root"
+                + " SET " + setStr
+                + " " + (conditions ? conditions.toString() : "");
         try {
-            console.log("# update string: ", sql, Object.values(data));
+            console.log("[DB - UPDATE]:", sql);
             this.db.run(sql, Object.values(data),
                 function(error, result) {
                     if (!thiz._isError(error) && callback) callback(result);
@@ -263,7 +263,10 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.delete = function(clazz, conditions, callback) {
+    DB.prototype.update = function(clazz, data, callback) {
+        this.batchUpdate(clazz, data, Condition.eq(clazz.without_rowid ? "id" : "rowid", data.id), callback);
+    };
+    DB.prototype.batchDelete = function(clazz, conditions, callback) {
         console.log("[DB - Batch Delete]:");
         var thiz = this;
         var sql = "DELETE FROM " + clazz.tablename + " AS _root " + conditions.toString();
@@ -278,6 +281,9 @@ var DataAdapter = (function() {
         } finally {
             this.close();
         }
+    };
+    DB.prototype.delete = function(clazz, id, callback) {
+        this.batchDelete(clazz, Condition.eq(clazz.without_rowid ? "id" : "rowid", id), callback);
     };
     DB.prototype.getAll = function(clazz, conditions, orders, callback) {
         var thiz = this;
@@ -323,18 +329,17 @@ var DataAdapter = (function() {
         }
     };
     DB.prototype.getById = function(clazz, id, callback) {
+        var thiz = this;
         console.log("[DB - Get by Id]:", clazz.tablename, id);
         var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ")
-                + "_root.* FROM $tablename _root WHERE "
+                + "_root.* FROM " + clazz.tablename + " _root WHERE "
                 + (clazz.without_rowid ? "id" : "rowid") + " = $id";
         try {
+            console.log("[DB - GET]:", sql);
             if (!this.db) this.db = getConnection();
-            this.db.get(sql, {$tablename: clazz.tablename, $id: id}, function(error, data) {
-                if (!this._isError(error) && callback) {
-                    var result = data.map((d) => {
-                        return mappingDb2Model(d, clazz);
-                    });
-                    callback(result.length ? result[0] : null);
+            this.db.get(sql, {$id: id}, function(error, data) {
+                if (!thiz._isError(error) && callback) {
+                    callback(mappingDb2Model(data, clazz));
                 }
             });
         } catch(error) {
@@ -453,16 +458,16 @@ var DataAdapter = (function() {
             new DB(getConnection()).insertMulti(clazz, list, callback);
         },
         update: function(clazz, data, callback) {
-            new DB(getConnection()).update(clazz, data, Condition.eq("id", data.id), callback);
-        },
-        deleteById: function(clazz, id, callback) {
-            new DB(getConnection()).delete(clazz, Condition.eq("id", id), callback);
+            new DB(getConnection()).update(clazz, data, callback);
         },
         batchUpdate: function(clazz, values, condition, callback) {
-            new DB(getConnection()).update(clazz, values, condition, callback);
+            new DB(getConnection()).batchUpdate(clazz, values, condition, callback);
+        },
+        deleteById: function(clazz, id, callback) {
+            new DB(getConnection()).delete(clazz, id, callback);
         },
         batchDelete: function(clazz, condition, callback) {
-            new DB(getConnection()).delete(clazz, condition, callback);
+            new DB(getConnection()).batchDelete(clazz, condition, callback);
         },
         getAll: function(clazz, condition, orders, callback) {
             new DB(getConnection()).getAll(clazz, condition, orders, callback);

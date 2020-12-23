@@ -15,7 +15,7 @@ module.exports = {
         email: {datatype: "TEXT"},
         sex: {datatype: "INT"},
         phone: {datatype: "TEXT"},
-        password: {datatype: "TEXT", ignore: true},
+        password: {datatype: "TEXT", dbignore: true, visible: false},
         createdDate: {mapping: "created_date", datatype: "DateTime"},
         status: {datatype: "INT"},
         deleted: {datatype: "INT"}

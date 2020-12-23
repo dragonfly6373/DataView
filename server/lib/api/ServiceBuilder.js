@@ -18,17 +18,30 @@ module.exports = (function() {
         }
         // service = service.concat(params);
         console.log("### init API:", api_name, name, api[name]);
+        function parseQueryString(query) {
+            try {
+                var json = JSON.parse(query);
+                return json;
+            } catch(error) {
+                return query;
+            }
+        }
         return function(req, res, next) {
-            console.log("@@@ request: ", req.body, req.query);
-            var reqData = {...req.body, ...req.query};
+            var query = Object.keys(req.query).reduce((a, k) => {
+                a[k] = parseQueryString(req.query[k]);
+                return a;
+            }, {});
+            var reqData = {...req.body, ...query};
             var values = [req];
             for (var i in params) {
                 values.push(reqData[params[i]]);
             }
-            values.push(function(result) {
-                if (result && result.code && result.code != 200) res.status(code);
-                res.json(result);
-            });
+            function response(result) {
+                var status = 200;
+                if (result && result.error && result.status) status = result.status;
+                res.status(status).json(result);
+            }
+            values.push(response);
             if (!authentication) {
                 controller.implementation.apply(null, values);
                 return;
@@ -36,17 +49,17 @@ module.exports = (function() {
             if (typeof(authentication) === "function") {
                 var result = authentication(req);
                 if (!result) {
-                    res.json({error: "You are un-authorize to access data. Login with other account and try again."});
+                    res.status(403).json({error: "You are un-authorize to access data. Login with other account and try again."});
                 } else {
                     controller.implementation.apply(null, values);
                 }
             } else if (typeof(authentication.then) === "function") {
                 authentication(req, res).then(function(result) {
-                        if (!result) res.json({error: "You are un-authorize to access data. Login with other account and try again."});
+                        if (!result) res.status(403).json({error: "You are un-authorize to access data. Login with other account and try again."});
                         else controller.implementation.apply(null, values);
                     })
                     .catch(function(error) {
-                        res.json({error: "You are un-authorize to access data. Login with other account and try again."});
+                        res.status(403).json({error: "You are un-authorize to access data. Login with other account and try again."});
                     });
             }
         };
@@ -63,7 +76,6 @@ module.exports = (function() {
         controllers.forEach(function(controller) {
             if (!controller || !controller.name || typeof(controller.implementation) !== "function") return;
             var routing = buildRouting(api_name, controller)
-            console.log("#routing:", routing);
             if (controller.method.toUpperCase() == "POST") {
                 router.post("/" + controller.name, routing);
             } else {

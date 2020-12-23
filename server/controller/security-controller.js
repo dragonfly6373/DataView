@@ -21,7 +21,8 @@ var _Account = {
 
 module.exports = [
     {
-        name: "signIn", method: "POST",
+        name: "signIn",
+        method: "POST",
         implementation: function(req, accountInfo, callback) {
             DB.beginTransaction(function(pool) {
                 pool.count(Account, Condition.eq("email", accountInfo.email), function(count) {
@@ -35,7 +36,8 @@ module.exports = [
         }
     },
     {
-        name: "requestResetPassword", method: "GET",
+        name: "requestResetPassword",
+        method: "GET",
         implementation: function(req, email, callback) {
             console.log("@@ request body: ", req.body);
             DB.getFirst(Account, Condition.eq("email", email), null, (acc) => {
@@ -48,14 +50,15 @@ module.exports = [
         }
     },
     {
-        name: "resetPassword", method: "POST",
+        name: "resetPassword",
+        method: "POST",
         implementation: function(req, password, retoken, callback) {
             SessionAuthen.getToken(req, acc => {
                 console.log("@@@ resetPassword:", acc, retoken);
-                if (acc.token != retoken) callback({code: 304, error: "incorrect token"});
+                if (acc.token != retoken) callback({status: 403, error: "incorrect token"});
                 else {
                     bcrypt.hash(password, 16, (error, hash) => {
-                        if (error) callback({code: 304, error: error});
+                        if (error) callback({status: 500, error: error});
                         else {
                             console.log("-->", password, hash);
                             DB.batchUpdate(Account, {password: hash}, Condition.eq("email", acc.email), callback);
@@ -66,17 +69,18 @@ module.exports = [
         }
     },
     {
-        name: "login", method: "POST", implementation: function(req, email, password, callback) {
+        name: "login",
+        method: "POST", implementation: function(req, email, password, callback) {
             DB.getFirst(_Account, Condition.eq("email", email), null, (acc) => {
                 if (!acc) {
-                    callback({error: "Incorrect email or password."});
+                    callback({status: 403, error: "Incorrect email or password."});
                     return;
                 }
                 bcrypt.compare(password, acc.password, (error, result) => {
                     if (error) callback(false);
                     else {
                         SessionAuthen.setCurrentLogin(req, acc, (error) => {
-                            if (error) callback({code: 304, error: error});
+                            if (error) callback({status: 403, error: error});
                             else getCurrentLogin(req, callback);
                         });
                     }
@@ -84,10 +88,12 @@ module.exports = [
             });
         }
     }, {
-        name: "getCurrentLogin", method: "GET",
+        name: "getCurrentLogin",
+        method: "GET",
         implementation: getCurrentLogin
     }, {
-        name: "logout", method: "GET", implementation: (req, callback) => {
+        name: "logout",
+        method: "GET", implementation: (req, callback) => {
             req.session.destroy(error => {
                 if (error) callback({error: error});
                 else callback(true);
