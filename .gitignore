@@ -9,3 +9,5 @@ server/node_modules
 server/lib/db/package-lock.json
 server/lib/db/node_modules
 
+web/dist
+web/build
