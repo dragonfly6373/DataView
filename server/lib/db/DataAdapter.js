@@ -132,9 +132,10 @@ var DataAdapter = (function() {
         }
         return false;
     };
-    DB.prototype._onError = function(error) {
+    DB.prototype._onError = function(error, callback) {
         console.log("[ERROR]", error);
         if (this.transactional) this.db.exec("ROLLBACK");
+        if (callback) callback({error: error});
     };
     DB.prototype.beginTransaction = function(callback) {
         var thiz = this;
@@ -187,7 +188,6 @@ var DataAdapter = (function() {
                 return true;
             }).map(c => {
                 var f = clazz.datafields[c];
-                console.log(" - field: ", f);
                 var s = (f.mapping || c) + " "
                     + (f.datatype instanceof Object ? f.datatype.sql_type : getDataTypeName(f.datatype))
                     + (f.pk ? " PRIMARY KEY" : "")
@@ -226,19 +226,55 @@ var DataAdapter = (function() {
         });
         var sql = "INSERT INTO {0} ({1}) VALUES({2})".format(clazz.tablename, fields.join(","), values.map(f => "?").join(","));
         try {
-            console.log("[DB - CREATE]:", sql);
+            console.log("[DB - INSERT]:", sql);
             this.db.run(sql, values, function(error) {
                 if (!thiz._isError(error) && callback) callback(this.lastID);
             });
         } catch(error) {
-            this._onError(error);
+            this._onError(error, callback);
         } finally {
             if (this.transactional) return;
             this.close();
         }
     };
-    DB.prototype.insertMulti = function(clazz, list, callback) {
-        console.log("Insert Multi:", clazz.tablename, data);
+    DB.prototype.insertMulti = function(clazz, array, callback) {
+        console.log("Insert Multi:", clazz.tablename, array);
+        if (!array || !array.length) {
+            callback(new Error("Data list is empty."));
+            return;
+        }
+        var fields = Object.keys(clazz.datafields).filter(c => !clazz.datafields[c].pk);
+        var dbfields = fields.map(c => {
+            var f = clazz.datafields[c];
+            return (f.mapping ? f.mapping : c);
+        });
+        array.forEach(function(data) {
+
+        });
+        var sql = "INSERT INTO " + clazz.tablename + " (" + dbfields.join(", ") + ") VALUES ";
+        var pattern = dbfields.map(f => "?").join(",");
+        var input = [];
+        array.forEach(function(data) {
+            var values = [];
+            sql += "(" + pattern + ")";
+            fields.forEach(c => {
+                values.push(convertSqlType(data[c], clazz.datafields[c].datatype));
+            });
+            input.push(values);
+        });
+        try {
+            if (!this.db) this.db = getConnection();
+            console.log("[DB INSET_MULTI");
+            this.db.run(sql, input.reduce((ac, values) => {
+                    ac.concat(values);
+                    return ac;
+                }, []), (error, data) => {
+                    if (!thiz._isError(error) && callback) callback();
+                }
+            );
+        } catch(error) {
+            this._onError(error, callback);
+        }
     };
     DB.prototype.batchUpdate = function(clazz, data, conditions, callback) {
         data = mappingModel2Db(data, clazz);
@@ -263,8 +299,8 @@ var DataAdapter = (function() {
             this.close();
         }
     };
-    DB.prototype.update = function(clazz, data, callback) {
-        this.batchUpdate(clazz, data, Condition.eq(clazz.without_rowid ? "id" : "rowid", data.id), callback);
+    DB.prototype.updateById = function(clazz, id, data, callback) {
+        this.batchUpdate(clazz, data, Condition.eq(clazz.without_rowid ? "id" : "rowid", id), callback);
     };
     DB.prototype.batchDelete = function(clazz, conditions, callback) {
         console.log("[DB - Batch Delete]:");
@@ -288,7 +324,7 @@ var DataAdapter = (function() {
     DB.prototype.getAll = function(clazz, conditions, orders, callback) {
         var thiz = this;
         var extras = getExtraColumn(clazz);
-        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "_root.rowid, ") + "_root.*"
                 + (extras && extras.length ? ", " + extras.join(", ") : "")
                 + " FROM " + clazz.tablename + " _root"
                 + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
@@ -315,6 +351,7 @@ var DataAdapter = (function() {
         if (!this.db) this.db = getConnection();
         var sql = "SELECT count(*) count FROM "
                 + clazz.tablename + " _root"
+                + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
                 + (conditions ? " " + conditions.toString() : "");
         try {
             console.log("[DB - COUNT]:", sql);
@@ -331,13 +368,16 @@ var DataAdapter = (function() {
     DB.prototype.getById = function(clazz, id, callback) {
         var thiz = this;
         console.log("[DB - Get by Id]:", clazz.tablename, id);
-        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ")
-                + "_root.* FROM " + clazz.tablename + " _root WHERE "
-                + (clazz.without_rowid ? "id" : "rowid") + " = $id";
+        var extras = getExtraColumn(clazz);
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "_root.rowid, ") + "_root.* "
+                + (extras && extras.length ? ", " + extras.join(", ") : "")
+                + " FROM " + clazz.tablename + " _root"
+                + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
+                + Condition.eq((clazz.without_rowid ? "id" : "rowid"), id).toString();
         try {
             console.log("[DB - GET]:", sql);
             if (!this.db) this.db = getConnection();
-            this.db.get(sql, {$id: id}, function(error, data) {
+            this.db.get(sql, function(error, data) {
                 if (!thiz._isError(error) && callback) {
                     callback(mappingDb2Model(data, clazz));
                 }
@@ -352,7 +392,7 @@ var DataAdapter = (function() {
     DB.prototype.getFirst = function(clazz, conditions, orders, callback) {
         var thiz = this;
         var extras = getExtraColumn(clazz);
-        var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+        var sql = "SELECT " + (clazz.without_rowid ? "" : "_root.rowid, ") + "_root.*"
                 + (extras && extras.length ? ", " + extras.join(", ") : "")
                 + " FROM " + clazz.tablename + " _root"
                 + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
@@ -385,7 +425,7 @@ var DataAdapter = (function() {
                         return;
                     }
                     var extras = getExtraColumn(clazz);
-                    var sql = "SELECT " + (clazz.without_rowid ? "" : "rowid, ") + "_root.*"
+                    var sql = "SELECT " + (clazz.without_rowid ? "" : "_root.rowid, ") + "_root.*"
                             + (extras && extras.length ? ", " + extras.join(", ") : "")
                             + " FROM " + clazz.tablename + " _root"
                             + (clazz.joins ? " " + clazz.joins.map(join => join.toString()).join(" ") : "")
@@ -432,7 +472,7 @@ var DataAdapter = (function() {
                     pool.dropTable(clazz, function() {
                         pool.create(clazz, function() {
                             callback();
-                            pool.close();
+                            pool.commit();
                         });
                     });
                 });
@@ -446,7 +486,7 @@ var DataAdapter = (function() {
                 pool.dropTable(clazz, function() {
                     pool.create(clazz, function() {
                         callback();
-                        pool.close();
+                        pool.commit();
                     });
                 });
             });
@@ -454,11 +494,11 @@ var DataAdapter = (function() {
         insert: function(clazz, object, callback) {
             new DB(getConnection()).insert(clazz, object, callback);
         },
-        insertMulti: function(clazz, list, callback) {
-            new DB(getConnection()).insertMulti(clazz, list, callback);
+        insertMulti: function(clazz, array, callback) {
+            new DB(getConnection()).insertMulti(clazz, array, callback);
         },
-        update: function(clazz, data, callback) {
-            new DB(getConnection()).update(clazz, data, callback);
+        updateById: function(clazz, id, data, callback) {
+            new DB(getConnection()).updateById(clazz, id, data, callback);
         },
         batchUpdate: function(clazz, values, condition, callback) {
             new DB(getConnection()).batchUpdate(clazz, values, condition, callback);
