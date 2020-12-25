@@ -125,9 +125,9 @@ var DataAdapter = (function() {
         this.db = connection;
         this.transactional = false;
     }
-    DB.prototype._isError = function(error) {
+    DB.prototype._isError = function(error, callback) {
         if (error) {
-            this._onError(error);
+            this._onError(error, callback);
             return true;
         }
         return false;

@@ -39,7 +39,7 @@ var updateStore = {
                 data.updatedDate = new Date();
                 pool.update(Store, data, () => {
                     if (callback) callback();
-                    pool.close();
+                    pool.commit();
                 });
             });
         });

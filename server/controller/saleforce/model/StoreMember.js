@@ -1,9 +1,7 @@
-const {DB} = require("../lib/db");
+const {DB} = require("db");
 var DataType = DB.DataType;
 
-const Store = require("../Store");
-const Member = require("../Member");
-
+const {Store, Member} = require("model");
 
 var Status = {
     ACTIVE: {code: 10, name: "Active"},

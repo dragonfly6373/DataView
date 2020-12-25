@@ -1,4 +1,4 @@
-const {DB} = require("../../lib/db");
+const {DB} = require("db");
 var DataType = DB.DataType;
 
 var AdminType = {

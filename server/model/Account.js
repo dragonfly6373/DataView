@@ -1,10 +1,16 @@
 const {DB} = require("../lib/db");
 var DataType = DB.DataType;
 
-var AccountStatus = {
-    ACTIVE: {code: 10, name: "Active"},
+var Status = {
+    ACTIVE:   {code: 10, name: "Active"},
     PENDDING: {code: 20, name: "Pendding"},
-    SUSPEND: {code: 30, name: "Suspend"}
+    SUSPEND:  {code: 30, name: "Suspend"}
+};
+
+var Gender = {
+    FEMALE: {code: 0, name: "Female"},
+    MALE:   {code: 1, name: "Male"},
+    OTHER:  {cod: 2, name: "Other"}
 };
 
 module.exports = {
@@ -20,5 +26,6 @@ module.exports = {
         status: {datatype: "INT"},
         deleted: {datatype: "INT"}
     },
-    AccountStatus: AccountStatus
+    Status: Status,
+    Gender: Gender
 };

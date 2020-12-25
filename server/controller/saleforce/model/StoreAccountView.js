@@ -1,15 +1,14 @@
-const {DB, DbJoin} = require("../lib/db");
+const {DB, DbJoin} = require("db");
 var DataType = DB.DataType;
 
-var Account = require("../../model/Account");
-var Store = require("../../model/Store");
+var {Account, Store} = require("model");
 var StoreAccountSetting = require("./StoreAccountSetting");
 
 module.exports = {
     tablename:"store_account_setting",
-    nativejoin: [
-        DbJoin.LEFT(Account, "acc").ON(Condition.eqProperty("account_id", "acc.id")),
-        DbJoin.LEFT(Store, "store").ON(Condition.eqProperty("store_id", "store.id"))
+    joins: [
+        DbJoin.leftJoin(Account, "acc").on(Condition.eqProperty("account_id", "acc.id")),
+        DbJoin.leftJoin(Store, "store").on(Condition.eqProperty("store_id", "store.id"))
     ],
     datafields: {
         ...StoreAccountSetting.datafields,

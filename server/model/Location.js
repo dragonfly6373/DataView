@@ -3,9 +3,9 @@ var DataType = DB.DataType;
 
 var LocationLevel = {
     STATE: {code: 10, name: "State", title: "Province"},
-    CITY: {code: 20, name: "City", title: "City"},
-    DISTRICT: {code: 30, name: "District", title: "District"},
-    WARD: {code: 40, name: "Ward", title: "Ward"}
+    DISTRICT: {code: 20, name: "District", title: "District"},
+    WARD: {code: 30, name: "Ward", title: "Ward"},
+    CITY: {code: 40, name: "City", title: "City"}
 };
 
 var Location = {

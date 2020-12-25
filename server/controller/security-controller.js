@@ -29,7 +29,7 @@ module.exports = [
                     if (count > 0) callback({error: "Account Email have already registered"});
                     else pool.insert(Account, account, function(id) {
                         callback();
-                        pool.close();
+                        pool.commit();
                     });
                 })
             });
